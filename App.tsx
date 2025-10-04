@@ -65,7 +65,7 @@ function AppContent() {
   const navigateToCruises = () => navigateWithTransition('/cruises');
   const navigateToTravelOptions = () => navigateWithTransition('/travel-options');
   const navigateToContact = () => navigateWithTransition('/contact');
-  const navigateToStories = () => navigateWithTransition('/stories');
+  const navigateToStories = () => navigateWithTransition('/TravLin-Stories');
 
   // Dedicated footer contact navigation
   const handleFooterContactClick = () => {
@@ -293,6 +293,21 @@ function AppContent() {
             />
           </div>
         } />
+        <Route path="/TravLin-Stories" element={
+          <div>
+            <SEOHead page="stories" />
+            <TravLinStoriesPage
+              onNavigateBack={navigateToStories}
+              onNavigateToHome={navigateToHome}
+              onNavigateToAbout={navigateToAbout}
+              onNavigateToCruises={navigateToCruises}
+              onNavigateToTravelOptions={navigateToTravelOptions}
+              onNavigateToContact={handleFooterContactClick}
+              onNavigateToStories={navigateToStories}
+            />
+          </div>
+        } />
+        {/* Keep /stories as redirect for compatibility */}
         <Route path="/stories" element={
           <div>
             <SEOHead page="stories" />
