@@ -11,7 +11,7 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from 'lucide
 
 
 // Using TravLin Travel branded hero image for Contact Us
-const contactHeroImage = 'https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759558778/travel-brochure-withth-e-heading-travlin-travel-co-hU7zcQ6GTQmxqJGFpHi4Dg-Ix2ShrXRTd26K468QkcBcw-e1727673041297_ibirmu.png'
+const contactHeroImage = 'https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759077936/Why-Use-Travlin-travel-17_ee3rkv.png'
 
 
 interface ContactPageProps {
