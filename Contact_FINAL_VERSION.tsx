@@ -131,13 +131,13 @@ export default function ContactPage({ onNavigateBack, onNavigateToServices, onNa
       
 
       
-      {/* Hero Section - Optimized Responsive Background */}
+      {/* Hero Section - Ultra High Resolution Optimized */}
       <section 
-        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24 hero-bg-responsive"
+        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24 hero-bg-responsive contact-hero-ultra-crisp"
         style={{
           background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100%), url(${contactHeroImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'center 40%',
           backgroundRepeat: 'no-repeat'
         }}
       >
