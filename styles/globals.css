@@ -535,32 +535,131 @@
 /* Article Hero Mobile Optimization - Proper Height for Mobile Reading */
 @media (max-width: 768px) {
   .article-hero-mobile-optimized {
-    height: 50vh !important;
-    min-height: 50vh !important;
+    height: 55vh !important;
+    min-height: 55vh !important;
     background-attachment: scroll !important;
-    background-position: center 35% !important;
+    background-position: center 40% !important;
+    background-size: cover !important;
   }
 }
 
 @media (max-width: 480px) {
   .article-hero-mobile-optimized {
-    height: 45vh !important;
-    min-height: 45vh !important;
+    height: 50vh !important;
+    min-height: 50vh !important;
     background-attachment: scroll !important;
-    background-position: center 30% !important;
+    background-position: center 35% !important;
+    background-size: cover !important;
   }
 }
 
-/* High Resolution Image Optimization */
-.hero-bg-responsive {
+/* Enhanced Article Hero for Better Image Quality */
+.article-hero-enhanced {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
+  will-change: transform;
+}
+
+/* Desktop Article Hero Optimization */
+@media (min-width: 769px) {
+  .article-hero-mobile-optimized {
+    height: 85vh !important;
+    min-height: 85vh !important;
+    background-attachment: fixed !important;
+    background-position: center 45% !important;
+    background-size: cover !important;
+  }
+}
+
+/* Large Desktop Article Hero */
+@media (min-width: 1024px) {
+  .article-hero-mobile-optimized {
+    height: 90vh !important;
+    min-height: 90vh !important;
+    background-position: center 50% !important;
+  }
+}
+
+/* Ultra Large Screens */
+@media (min-width: 1440px) {
+  .article-hero-mobile-optimized {
+    height: 95vh !important;
+    min-height: 95vh !important;
+    background-position: center 55% !important;
+  }
+}
+
+/* Enhanced Story Image Optimization */
+.story-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.story-image-container img {
+  transition: transform 0.3s ease;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.story-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Featured Article Responsive Heights */
+@media (max-width: 640px) {
+  .featured-article-image {
+    height: 16rem !important; /* h-64 */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .featured-article-image {
+    height: 18rem !important; /* h-72 */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .featured-article-image {
+    height: 20rem !important; /* h-80 */
+  }
+}
+
+@media (min-width: 1025px) {
+  .featured-article-image {
+    height: 24rem !important; /* h-96 */
+  }
+}
+
+/* Story Card Consistent Heights - FIXED DIMENSIONS FOR ALL CARDS */
+.story-card-image {
+  height: 200px !important; /* Fixed consistent height for all story cards */
+  width: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+@media (max-width: 640px) {
+  .story-card-image {
+    height: 180px !important; /* Slightly smaller on mobile but still consistent */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .story-card-image {
+    height: 190px !important; /* Medium tablets */
+  }
+}
+
+@media (min-width: 769px) {
+  .story-card-image {
+    height: 200px !important; /* Desktop - standard consistent height */
+  }
 }
 
 /* Ultra Crisp Contact Hero Image */
