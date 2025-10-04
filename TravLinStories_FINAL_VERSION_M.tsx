@@ -295,55 +295,20 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
           onNavigateToStories={handleNavigateToStories}
         />
 
-        {/* Article Hero Image - Mobile Optimized */}
+        {/* Article Hero Image - Clean No Text Overlay */}
         <section 
-          className="relative h-[85vh] flex items-end text-white article-hero-mobile-optimized"
+          className="relative h-[85vh] article-hero-mobile-optimized article-hero-enhanced"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15)), url('${article.image}')`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-            backgroundRepeat: 'no-repeat'
+            backgroundPosition: window.innerWidth <= 480 ? 'center 35%' : window.innerWidth <= 768 ? 'center 40%' : window.innerWidth <= 1024 ? 'center 45%' : 'center 50%',
+            backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+            backgroundRepeat: 'no-repeat',
+            imageRendering: '-webkit-optimize-contrast',
+            WebkitTransform: 'translateZ(0)',
+            transform: 'translateZ(0)'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
-          <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <motion.div 
-                className="mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <Badge 
-                  style={{
-                    ...getCategoryBadgeStyle(article.category),
-                    minHeight: getCategoryColor(article.category) === 'var(--brand-orange)' ? '44px' : '32px',
-                    height: getCategoryColor(article.category) === 'var(--brand-orange)' ? '44px' : '32px',
-                    width: getCategoryColor(article.category) === 'var(--brand-orange)' ? '140px' : '110px',
-                    fontSize: getCategoryColor(article.category) === 'var(--brand-orange)' ? '1rem' : '0.875rem',
-                    fontWeight: '600',
-                    letterSpacing: '0.5px',
-                    padding: getCategoryColor(article.category) === 'var(--brand-orange)' ? '8px 16px' : '6px 12px'
-                  }}
-                  className="text-white uppercase tracking-wide shadow-lg"
-                >
-                  {article.category}
-                </Badge>
-              </motion.div>
-              <motion.h1 
-                className="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight text-shadow-extra"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                dangerouslySetInnerHTML={{ __html: article.title }}
-              />
-            </motion.div>
-          </div>
         </section>
 
         {/* Article Content - COMPACT WITH SUBTLE SHADING */}
@@ -474,14 +439,14 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
             <div className="max-w-4xl mx-auto">
               <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 bg-white border border-gray-200">
                 <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative">
+                  <div className="story-image-container featured-article-image">
                     <SimpleImage
                       src={featuredArticle.image}
                       alt={featuredArticle.title}
-                      className="w-full h-64 md:h-full object-cover"
+                      className="w-full h-full object-cover"
                     />
                     <Badge 
-                      className="absolute top-4 left-4 text-white font-semibold"
+                      className="absolute top-4 left-4 text-white font-semibold shadow-lg z-10"
                       style={{ backgroundColor: getCategoryColor(featuredArticle.category) }}
                     >
                       FEATURED
@@ -554,11 +519,11 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {visibleArticles.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white border border-gray-200">
-                  <div className="relative">
+                  <div className="story-image-container story-card-image">
                     <SimpleImage
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-full object-cover"
                     />
                     
                     {/* MAIN CATEGORY BADGE - TOP RIGHT CORNER */}
