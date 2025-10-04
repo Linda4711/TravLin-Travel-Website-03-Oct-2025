@@ -516,7 +516,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
             <SectionDivider />
             <h2 className="section-heading text-center margin-bottom">More Stories</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div className="card-grid max-w-7xl mx-auto">
               {visibleArticles.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white border border-gray-200">
                   <div className="story-image-container story-card-image">
@@ -549,7 +549,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
                       </Badge>
                     </div>
                   </div>
-                  <CardContent className="p-4">
+                  <CardContent className="p-6">
                     
                     <h3 
                       className="text-lg font-semibold mb-3 text-gray-800 story-title cursor-pointer line-clamp-2"
