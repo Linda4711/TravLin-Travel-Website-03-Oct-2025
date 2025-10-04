@@ -44,9 +44,9 @@ export default function TermsPrivacy({ isOpen, onClose }: TermsPrivacyProps) {
   const CONTACT_EMAIL = 'hello@travlintravel.com.au'
 
   const pdfLinks = {
-    serviceFees: 'https://travlintravel.com.au/wp-content/uploads/sites/12/2025/07/TravLin-Travel_Schedule-of-FeesATIA-Fee-Flyer_JUL-25.pdf',
-    travelInfo: 'https://travlintravel.com.au/wp-content/uploads/sites/12/2025/07/TravLin-Travel_Travel-Information-ONLY_JUL25.pdf',
-    customerAcceptance: 'https://travlintravel.com.au/wp-content/uploads/sites/12/2025/07/TravLin-Travel_Customer-Acceptance-ONLY_JUL25.pdf'
+    serviceFees: '/documents/TravLin-Travel_Schedule-of-FeesATIA-Fee-Flyer_JUL-25.pdf',
+    travelInfo: '/documents/TravLin-Travel_Travel-Information-ONLY_JUL25.pdf',
+    customerAcceptance: '/documents/TravLin-Travel_Customer-Acceptance-ONLY_JUL25.pdf'
   }
 
   if (!isOpen) return null
@@ -213,22 +213,22 @@ This customer has completed the legal acceptance process and can now proceed wit
   const modalContent = () => {
     if (submissionComplete) {
       return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-          <Card className="w-full max-w-md">
-            <CardContent className="p-8 text-center">
-              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
+          <Card className="w-full max-w-md bg-white shadow-2xl border border-gray-300">
+            <CardContent className="p-4 md:p-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Terms Accepted Successfully!</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">Terms Accepted Successfully!</h3>
+              <p className="text-gray-600 mb-4 text-sm">
                 Thank you, {form.firstName}! Please contact us at {CONTACT_EMAIL} with your acceptance ID for next steps.
-                Your acceptance ID is: <span className="font-mono text-blue-600">TLT-{Date.now()}</span>
+                Your acceptance ID is: <span className="font-mono text-blue-600 text-xs">TLT-{Date.now()}</span>
               </p>
-              <div className="space-y-3">
-                <Button onClick={handleClose} className="w-full">
+              <div className="space-y-2">
+                <Button onClick={handleClose} className="w-full text-sm" size="sm">
                   Continue Planning Your Trip
                 </Button>
-                <Button variant="outline" onClick={resetForm} className="w-full">
+                <Button variant="outline" onClick={resetForm} className="w-full text-sm" size="sm">
                   Submit Another Acceptance
                 </Button>
               </div>
@@ -240,62 +240,64 @@ This customer has completed the legal acceptance process and can now proceed wit
 
     if (showAcceptanceForm) {
       return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-hidden">
-            <div className="flex items-center justify-between p-6 border-b">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 text-white" />
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
+          <Card className="w-full max-w-2xl max-h-[95vh] md:max-h-[90vh] overflow-hidden bg-white shadow-2xl border border-gray-300">
+            <div className="flex items-center justify-between p-3 md:p-4 border-b bg-gray-50">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-800">Customer Acceptance Form</h2>
-                  <p className="text-sm text-gray-500">Complete to proceed with booking</p>
+                  <h2 className="text-lg md:text-xl font-bold text-gray-800">Customer Acceptance Form</h2>
+                  <p className="text-xs md:text-sm text-gray-500">Complete to proceed with booking</p>
                 </div>
               </div>
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={() => setShowAcceptanceForm(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 h-8 w-8"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </Button>
             </div>
             
-            <CardContent className="p-6 overflow-y-auto max-h-[calc(90vh-180px)]">
-              <div className="space-y-6">
+            <CardContent className="p-3 md:p-5 overflow-y-auto max-h-[calc(95vh-160px)] md:max-h-[calc(90vh-180px)] bg-white">
+              <div className="space-y-4">
                 {/* Customer Information */}
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-gray-800 flex items-center gap-2">
+                <div className="space-y-3">
+                  <h3 className="font-semibold text-gray-800 flex items-center gap-2 text-sm">
                     <User className="w-4 h-4" />
                     Customer Information
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                      <Label htmlFor="firstName">First Name *</Label>
+                      <Label htmlFor="firstName" className="text-xs">First Name *</Label>
                       <Input
                         id="firstName"
                         value={form.firstName}
                         onChange={(e) => handleInputChange('firstName', e.target.value)}
                         placeholder="Enter your first name"
                         required
+                        className="h-8"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Label htmlFor="lastName" className="text-xs">Last Name *</Label>
                       <Input
                         id="lastName"
                         value={form.lastName}
                         onChange={(e) => handleInputChange('lastName', e.target.value)}
                         placeholder="Enter your last name"
                         required
+                        className="h-8"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <Label htmlFor="email">Email Address *</Label>
+                    <Label htmlFor="email" className="text-xs">Email Address *</Label>
                     <Input
                       id="email"
                       type="email"
@@ -303,107 +305,115 @@ This customer has completed the legal acceptance process and can now proceed wit
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       placeholder="Enter your email address"
                       required
+                      className="h-8"
                     />
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                      <Label htmlFor="phone">Phone Number</Label>
+                      <Label htmlFor="phone" className="text-xs">Phone Number</Label>
                       <Input
                         id="phone"
                         type="tel"
                         value={form.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
                         placeholder="+61 xxx xxx xxx"
+                        className="h-8"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="businessName">Business Name (Optional)</Label>
+                      <Label htmlFor="businessName" className="text-xs">Business Name (Optional)</Label>
                       <Input
                         id="businessName"
                         value={form.businessName}
                         onChange={(e) => handleInputChange('businessName', e.target.value)}
                         placeholder="Company/Organization name"
+                        className="h-8"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Terms Acceptance */}
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-gray-800 flex items-center gap-2">
+                <div className="space-y-3">
+                  <h3 className="font-semibold text-gray-800 flex items-center gap-2 text-sm">
                     <Shield className="w-4 h-4" />
                     Terms & Conditions Acceptance
                   </h3>
                   
-                  <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-start gap-3">
+                  <div className="space-y-3 p-3 bg-gray-50 rounded">
+                    <div className="flex items-start gap-2">
                       <Checkbox
                         id="agreeTerms"
                         checked={form.agreedToTerms}
                         onCheckedChange={(checked) => handleInputChange('agreedToTerms', !!checked)}
+                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                       />
-                      <Label htmlFor="agreeTerms" className="text-sm leading-relaxed">
+                      <Label htmlFor="agreeTerms" className="text-xs leading-relaxed">
                         I have read and agree to the <a href={pdfLinks.travelInfo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Travel Information & Terms of Service</a> *
                       </Label>
                     </div>
                     
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-2">
                       <Checkbox
                         id="agreeFees"
                         checked={form.agreedToFees}
                         onCheckedChange={(checked) => handleInputChange('agreedToFees', !!checked)}
+                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                       />
-                      <Label htmlFor="agreeFees" className="text-sm leading-relaxed">
+                      <Label htmlFor="agreeFees" className="text-xs leading-relaxed">
                         I have read and agree to the <a href={pdfLinks.serviceFees} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Schedule of Professional Service Fees</a> *
                       </Label>
                     </div>
                     
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-2">
                       <Checkbox
                         id="agreePrivacy"
                         checked={form.agreedToPrivacy}
                         onCheckedChange={(checked) => handleInputChange('agreedToPrivacy', !!checked)}
+                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                       />
-                      <Label htmlFor="agreePrivacy" className="text-sm leading-relaxed">
-                        I have read and agree to the <a href={pdfLinks.customerAcceptance} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Customer Acceptance Form</a> and Privacy Policy and understand how my personal information will be handled *
+                      <Label htmlFor="agreePrivacy" className="text-xs leading-relaxed">
+                        I have read and agree to the <a href={pdfLinks.customerAcceptance} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Customer Acceptance Form</a> *
                       </Label>
                     </div>
                   </div>
                 </div>
 
                 {/* Legal Notice */}
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-blue-50 p-3 rounded border border-blue-200">
+                  <p className="text-xs text-blue-700">
                     <strong>Legal Notice:</strong> By submitting this form, you acknowledge that any payment for travel components constitutes acceptance of both agency and supplier terms and conditions. This acceptance will be recorded for your reference.
                   </p>
                 </div>
               </div>
             </CardContent>
             
-            <div className="p-6 border-t bg-gray-50">
-              <div className="flex gap-3">
+            <div className="p-3 md:p-4 border-t bg-gray-50">
+              <div className="flex gap-2">
                 <Button 
                   variant="outline" 
                   onClick={() => setShowAcceptanceForm(false)}
-                  className="flex-1"
+                  className="flex-1 text-xs md:text-sm"
+                  size="sm"
                 >
                   Cancel
                 </Button>
                 <Button 
                   onClick={handleSubmitAcceptance}
                   disabled={isSubmitting || !form.agreedToTerms || !form.agreedToFees || !form.agreedToPrivacy}
-                  className="flex-1"
+                  className="flex-1 text-xs md:text-sm"
                   style={{ backgroundColor: 'var(--brand-orange)' }}
+                  size="sm"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="w-3 h-3 mr-1 animate-spin" />
                       Submitting...
                     </>
                   ) : (
                     <>
-                      <CheckCircle className="w-4 h-4 mr-2" />
+                      <CheckCircle className="w-3 h-3 mr-1" />
                       Accept Terms & Continue
                     </>
                   )}
@@ -416,129 +426,99 @@ This customer has completed the legal acceptance process and can now proceed wit
     }
 
     return (
-      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-        <Card className="w-full max-w-4xl max-h-[90vh] overflow-hidden bg-white shadow-2xl border-2 border-gray-200">
-          <div className="flex items-center justify-between p-6 border-b">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--brand-blue)' }}>
-                <FileText className="w-5 h-5 text-white" />
+      <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
+        <Card className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-hidden bg-white shadow-2xl border border-gray-300">
+          <div className="flex items-center justify-between p-3 md:p-4 border-b bg-gray-50">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--brand-blue)' }}>
+                <FileText className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-gray-800">Terms & Privacy</h2>
-                <p className="text-sm text-gray-500">Effective 01 Jul 2025</p>
+                <h2 className="text-lg md:text-xl font-bold text-gray-800">Terms & Privacy</h2>
+                <p className="text-xs md:text-sm text-gray-500">Effective 01 Jul 2025</p>
               </div>
             </div>
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={handleClose}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-500 hover:text-gray-700 h-8 w-8"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </Button>
           </div>
           
-          <CardContent className="p-6 overflow-y-auto max-h-[calc(90vh-200px)] bg-white">
-            <div className="space-y-6">
+          <CardContent className="p-3 md:p-5 overflow-y-auto max-h-[calc(95vh-160px)] md:max-h-[calc(90vh-180px)] bg-white">
+            <div className="space-y-4">
               {/* Quick Access Downloads */}
-              <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                <h3 className="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+              <div className="bg-blue-50 p-3 rounded border border-blue-200">
+                <h3 className="font-semibold text-blue-800 mb-2 flex items-center gap-2 text-sm">
                   <Download className="w-4 h-4" />
                   Document Downloads
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                   <a 
                     href={pdfLinks.serviceFees} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
                   >
-                    <FileText className="w-4 h-4" />
+                    <FileText className="w-3 h-3" />
                     Schedule of Professional Service Fees
                   </a>
                   <a 
                     href={pdfLinks.travelInfo} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
                   >
-                    <FileText className="w-4 h-4" />
+                    <FileText className="w-3 h-3" />
                     Travel Information & Terms
                   </a>
                   <a 
                     href={pdfLinks.customerAcceptance} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
                   >
-                    <FileText className="w-4 h-4" />
+                    <FileText className="w-3 h-3" />
                     Customer Acceptance Form
                   </a>
                 </div>
               </div>
 
-              {/* Customer Acceptance CTA */}
-              <div className="bg-orange-50 p-6 rounded-lg border border-orange-200 text-center">
-                <div className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: 'var(--brand-orange)' }}>
-                  <CheckCircle className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-semibold text-orange-800 mb-3">Ready to Proceed with Your Booking?</h3>
-                <p className="text-sm text-orange-700 mb-4">
-                  Complete our customer acceptance form to acknowledge that you've read and agree to our terms and conditions. 
-                  This enables us to proceed with your travel arrangements.
-                </p>
-                <Button 
-                  onClick={() => setShowAcceptanceForm(true)}
-                  style={{ backgroundColor: 'var(--brand-orange)' }}
-                  className="text-white hover:opacity-90"
-                >
-                  <CheckCircle className="w-4 h-4 mr-2" />
-                  Complete Customer Acceptance
-                </Button>
-              </div>
-
-              {/* Executive Summary */}
-              <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                <h3 className="font-semibold text-yellow-800 mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4" />
-                  Executive Summary
-                </h3>
-                <div className="text-sm text-yellow-700 space-y-2">
-                  <p>Although you should read all of the terms and conditions, the following is a summary of the most important:</p>
-                  <ul className="list-disc list-inside space-y-1 ml-4">
-                    <li>Prices, including, in some cases, of confirmed bookings, may be subject to change.</li>
-                    <li>Some confirmed bookings are non-refundable if cancelled by you and it is your responsibility to check if this applies.</li>
-                    <li>We will be entitled to retain our service fees even if a booking is cancelled or does not proceed for any reason which is not our fault.</li>
-                    <li>It is your responsibility to make yourself aware of all information relevant to your travel plans, including but not limited to visa requirements and health precautions.</li>
-                    <li>We are not your agent and may receive additional fees or other incentives from Suppliers.</li>
-                    <li>We are not liable for the accuracy of any published Supplier content including websites and brochures.</li>
-                  </ul>
-                </div>
-              </div>
 
               {/* Main Content */}
-              <div className="prose prose-sm max-w-none">
-                <h2 className="text-xl font-bold text-gray-800 mb-4">Terms & Conditions</h2>
+              <div 
+                className="prose prose-sm max-w-none text-xs leading-relaxed" 
+                style={{ 
+                  fontSize: '12px', 
+                  lineHeight: '1.5',
+                  '--prose-body': '12px',
+                  '--prose-headings': '14px'
+                }}
+              >
+                <h2 className="text-lg font-bold text-gray-800 mb-3">Terms & Conditions</h2>
                 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   Please read the following terms and conditions carefully.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   You must not make any booking unless you are 18 years of age or older and understand and agree with the following terms and conditions.
                   These terms and conditions apply to bookings you make with a Consultant (instore, over the phone or by email) as well as online bookings made via our website.
                   These terms and conditions govern our relationship with you. Once we accept a booking from you on behalf of a Supplier, you will also have a separate contract with the Supplier, which will be governed by other terms and conditions. It is your responsibility to make yourself aware of those other terms and conditions.
                 </p>
 
                 {/* Executive Summary */}
-                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mb-6">
-                  <h3 className="text-lg font-semibold text-yellow-800 mb-3 flex items-center gap-2">
+                <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 mb-4">
+                  <h3 className="text-sm font-semibold text-yellow-800 mb-2 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" />
                     Executive Summary
                   </h3>
-                  <div className="text-sm text-yellow-700 space-y-2">
+                  <div className="text-xs text-yellow-700 space-y-1">
                     <p>Although you should read all of the terms and conditions, the following is a summary of the most important:</p>
-                    <ul className="list-disc list-inside space-y-1 ml-4">
+                    <ul className="list-disc list-inside space-y-0.5 ml-3">
                       <li>Prices, including, in some cases, of confirmed bookings, may be subject to change.</li>
                       <li>Some confirmed bookings are non-refundable if cancelled by you and it is your responsibility to check if this applies.</li>
                       <li>We will be entitled to retain our service fees even if a booking is cancelled or does not proceed for any reason which is not our fault.</li>
@@ -549,27 +529,27 @@ This customer has completed the legal acceptance process and can now proceed wit
                   </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Prices and Taxes</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Prices and Taxes</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   All prices that we quote are in Australian Dollars and based on twin share accommodation unless otherwise stated. Please note that prices quoted are subject to change at the discretion of the Supplier prior to booking.
                   Price changes may occur after booking because of matters outside our control which increase the cost of the Product. Such factors include adverse currency fluctuations, fuel surcharges, taxes and airfare increases.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   Please contact your Consultant for up-to-date prices. Even if paid in full, a price may change because of matters outside our control.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   Prices include all applicable taxes requiring payment prior to departure, and may be subject to adjustment in the event of an increase in those taxes. On other occasions, you may be liable for taxes in addition to the quoted price of the Product. For example, there may be a local tax charged at some airports or resorts.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Products</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Products</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   All Products that we quote on are subject to availability and may be withdrawn or varied by the Supplier without notice.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Fees and Surcharges</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Fees and Surcharges</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees, credit card merchant fees,
                   insurance claim processing fees or fees for adhoc services performed as required. You may see our current schedule of professional service fees at service-fees.
                 </p>
@@ -591,47 +571,47 @@ This customer has completed the legal acceptance process and can now proceed wit
                   Changes and cancellations of confirmed bookings may incur fees from Suppliers in addition to our service fees. Suppliers' fees are outlined in their relevant terms and conditions.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Refunds</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Refunds</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   Your entitlement to a refund for cancelled bookings is subject to the relevant Supplier's terms and conditions.
                   If you are entitled to a refund then, subject to the Supplier's terms and conditions, we will arrange for it to be supplied to us on your behalf, unless we expressly agree with you otherwise.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   If we are managing or arranging a refund for a cancelled booking on your behalf it will not be paid to you until the Supplier provides the refund to us, and we will not be liable for any delay on the part of the Supplier. Be aware that typically airlines will take between 60-90 days to process a refund. Please note that if we are entitled to a service fee for placing a booking, we will remain entitled to this fee if you cancel the booking or the Supplier fails to provide you with the Product for any reason (other than our default), including in an event of Force Majeure. We will be entitled to deduct our service fee from any refund we receive on your behalf before remitting the balance to you.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Deposits and Payments</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Deposits and Payments</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   You will be required to pay a deposit (or deposits) when booking. The deposit amount varies depending on the Product booked and lead time to travel. In some instances, full payment is required at the time of booking and your consultant will advise the deposit amount at the time of booking. All deposits are non-refundable for changes of mind or cancellations by you (subject to your rights under the Australian Consumer Law). Where a deposit has been collected, final payment is required no later than six weeks prior to departure. Failure to make payment by the due date may result in your booking being cancelled and deposits forfeited.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   Payments made by direct deposit may take up to three business days to process. If you are paying by this method, you will need to make the payment at least three business days prior to the actual due date. You must notify you Consultant of your payment once it has been made.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-3 text-xs leading-relaxed">
                   Payments made by personal cheque (excluding bank cheques) require five business days to process. If you are paying by this method, you will need to make the payment at least five business days prior to the actual due date.
                   You agree not to stop payment of the cheque even when you cancel a booking. You agree that we may apply the proceeds of the cheque to satisfy any liability you have to us or to a Supplier, including any liability in respect of cancellation fees, before refunding the balance to you.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Information</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Information</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   Our responsibility is solely to arrange a booking of a Product in accordance with your instructions. It is your responsibility to make yourself aware of all information that it
                   is necessary or desirable to know in order to make optimum use of the Product and to undertake travel generally. We strongly recommend that you read our travel information at travel-information which may be relevant, especially in relation to passport and visa requirements. Please note that this information is provided as a guide only, and although it is accurate to the best of our knowledge, we do not warrant that it is completely up-to-date at all times. Further, we do not warrant that it is comprehensive and it may not address a topic that is relevant to your travel plans. It is your responsibility to further investigate and confirm any matters that are applicable to you.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Special Requirements</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Special Requirements</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   You must inform your consultant regarding any special requirements you may have for your travel arrangements such as special meal and seating requests, room type or disabled access prior to making a booking. If you do not specifically inform us we will assume that you do not have any such requirements, and the booking will be made on that basis.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Frequent Flyer and Loyalty Programs</h3>
-                <p className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Frequent Flyer and Loyalty Programs</h3>
+                <p className="mb-3 text-xs leading-relaxed">
                   When booking with one of our Consultants, it is your responsibility to let them know your frequent flyer membership details (or other applicable loyalty program details) for inclusion in your booking. Notwithstanding that your details may be included in the booking, we cannot guarantee that the Supplier will credit you with points for your booking.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Travel Documents</h3>
+                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Travel Documents</h3>
                 <p className="mb-4">
                   If you have booked with a consultant, it is your responsibility to collect all travel documents from us prior to travel unless your consultant is home based/mobile who can come to you. As a general rule, your travel documents will be available for collection two weeks prior to departure, however this will depend on your individual arrangements. Please contact your consultant to confirm when your travel documents are ready for collection. If you have booked online, you should print out and retain your travel documents as provided to you by the website (or in a confirmation email we send you). You must review your travel documents carefully and advise us immediately of any errors in names, dates or timings.
                 </p>
@@ -677,9 +657,9 @@ This customer has completed the legal acceptance process and can now proceed wit
                   <p><strong>"Force Majeure"</strong> means an act of God, peril of the sea, accident of navigation, war (including civil war), sabotage, riot, insurrection, civil commotion, coup d'état, national emergency, martial law, fire (including wildfire), explosion, lightning, flood, tsunami, cyclone, hurricane, tornado or other major weather event, earthquake, landslide, volcanic eruption or other natural catastrophe, epidemic, pandemic, quarantine, outbreaks of infectious disease or any other public health crisis, radiation or radioactive contamination, national strike or other major lack of availability of labour, raw materials or energy beyond the control of the affected party. For the avoidance of doubt, the inability of a party to make a profit or avoid a financial loss, changes in market prices or conditions, or a party's inability to perform its obligations due to insufficiency of finance does not in itself constitute Force Majeure.</p>
                 </div>
 
-                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 mb-6">
-                  <p className="text-sm text-orange-700">
-                    <strong>To proceed with your booking,</strong> please complete our customer acceptance form on to of the page by the button on the top of the page or available at customer-acceptance to acknowledge that you have read and agree to our terms and conditions and professional service fees. Please note regardless of you formally signing the customer acceptance that any payment of any travel component is considered as your acknowledgement in you having read, understood and accepted both agency and supplier Terms and Conditions.
+                <div className="bg-orange-50 p-3 rounded-lg border border-orange-200 mb-4">
+                  <p className="text-xs text-orange-700">
+                    <strong>To proceed with your booking,</strong> please complete our customer acceptance form available at the bottom of this page to acknowledge that you have read and agree to our terms and conditions and professional service fees. Please note that any payment of any travel component is considered as your acknowledgement that you have read, understood and accepted both agency and supplier Terms and Conditions.
                   </p>
                 </div>
 
@@ -888,24 +868,32 @@ This customer has completed the legal acceptance process and can now proceed wit
             </div>
           </CardContent>
           
-          <div className="p-6 border-t bg-gray-50">
-            <div className="flex justify-between items-center">
-              <p className="text-xs text-gray-500">
-                TravLin Travel reserves the right to change its privacy policy at any time. It is advisable to review this privacy statement periodically for changes.
+          <div className="p-3 md:p-4 border-t bg-orange-50 border-orange-200">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <CheckCircle className="w-4 h-4 text-orange-600" />
+                <h3 className="font-semibold text-orange-800 text-sm md:text-base">Ready to Proceed with Your Booking?</h3>
+              </div>
+              <p className="text-xs md:text-sm text-orange-700 mb-3 max-w-2xl mx-auto">
+                Complete our customer acceptance form to acknowledge that you've read and agree to our terms, conditions, and service fees. This enables us to proceed with your travel arrangements.
               </p>
-              <div className="flex gap-3">
+              <div className="flex gap-2 justify-center">
                 <Button 
                   onClick={() => setShowAcceptanceForm(true)}
                   style={{ backgroundColor: 'var(--brand-orange)' }}
-                  className="text-white"
+                  className="text-white hover:opacity-90 text-xs md:text-sm"
+                  size="sm"
                 >
-                  <CheckCircle className="w-4 h-4 mr-2" />
-                  Accept Terms
+                  <CheckCircle className="w-3 h-3 mr-1" />
+                  Complete Customer Acceptance
                 </Button>
-                <Button onClick={handleClose} variant="outline">
+                <Button onClick={handleClose} variant="outline" size="sm" className="text-xs md:text-sm">
                   Close
                 </Button>
               </div>
+              <p className="text-xs text-gray-500 mt-3 border-t border-orange-200 pt-2">
+                TravLin Travel reserves the right to change its privacy policy at any time. It is advisable to review this privacy statement periodically for changes.
+              </p>
             </div>
           </div>
         </Card>
