@@ -11,7 +11,7 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from 'lucide
 
 
 // Using TravLin Travel branded hero image for Contact Us
-const contactHeroImage = 'https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759077936/Why-Use-Travlin-travel-17_ee3rkv.png'
+const contactHeroImage = 'https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759558778/travel-brochure-withth-e-heading-travlin-travel-co-hU7zcQ6GTQmxqJGFpHi4Dg-Ix2ShrXRTd26K468QkcBcw-e1727673041297_ibirmu.png'
 
 
 interface ContactPageProps {
@@ -131,14 +131,13 @@ export default function ContactPage({ onNavigateBack, onNavigateToServices, onNa
       
 
       
-      {/* Hero Section - Matching TravLin Stories Style */}
+      {/* Hero Section - Optimized Responsive Background */}
       <section 
-        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24"
+        className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24 hero-bg-responsive"
         style={{
-          background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100% 100%), url(${contactHeroImage})`,
-          backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
-          backgroundPosition: window.innerWidth <= 768 ? 'center 25%' : 'center',
-          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+          background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100%), url(${contactHeroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       >
