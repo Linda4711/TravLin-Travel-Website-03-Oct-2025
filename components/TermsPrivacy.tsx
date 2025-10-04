@@ -328,7 +328,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               <a
-                href="/TravLin Travel_Schedule of Fees+ATIA Fee Flyer_JUL 25.pdf"
+                href="/TravLin Travel_Schedule of Fees+ATIA Fee Flyer_JUL25.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center p-2 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-sm font-medium"
