@@ -93,12 +93,23 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
   if (showCustomerAcceptance) {
     return (
       <div 
-        className="fixed inset-0 bg-white flex items-center justify-center p-4"
-        style={{ zIndex: 999999 }}
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+        style={{ 
+          zIndex: 999999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          width: '100vw'
+        }}
       >
         <div 
-          className="bg-white rounded-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl"
-          style={{ zIndex: 999999 }}
+          className="bg-white rounded-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl mx-auto"
+          style={{ 
+            zIndex: 999999,
+            margin: 'auto',
+            position: 'relative'
+          }}
         >
           {/* Header - ORANGE THEME */}
           <div className="sticky top-0 bg-white border-b-2 border-orange-200 px-4 py-3 flex justify-between items-center">
@@ -281,7 +292,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
   // Main Terms & Privacy Modal - Screen 1 - HIGH CONTRAST BLUE THEME
   return (
     <div 
-      className="fixed inset-0 bg-white flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
       style={{ zIndex: 999999 }}
     >
       <div 
