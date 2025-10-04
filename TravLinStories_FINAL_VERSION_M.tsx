@@ -284,7 +284,13 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
     
     return (
       <div className="min-h-screen bg-white">
-        <SEOHead page="stories" />
+        <SEOHead 
+          page="stories" 
+          ogImage={article.image}
+          ogImageAlt={`${article.title} - TravLin Travel Stories`}
+          title={`${article.title} | TravLin Travel Stories`}
+          description={article.excerpt}
+        />
         
         <Header 
           onNavigateToHome={onNavigateToHome}
@@ -390,7 +396,13 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
   // MAIN STORIES PAGE LAYOUT
   return (
     <div className="min-h-screen bg-white">
-      <SEOHead page="stories" />
+      <SEOHead 
+        page="stories" 
+        ogImage={featuredArticle.image}
+        ogImageAlt={`${featuredArticle.title} - TravLin Travel Stories`}
+        title={`TravLin Stories - ${featuredArticle.title} | Travel Tips & Inspiration`}
+        description={featuredArticle.excerpt}
+      />
       
       <Header 
         onNavigateToHome={onNavigateToHome}
