@@ -313,7 +313,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
 
         {/* Article Content - COMPACT WITH SUBTLE SHADING */}
         <main className="py-8 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="content-container-narrow">
             
             {/* Back Button - Clean and Simple */}
             <motion.div 
@@ -412,7 +412,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="relative z-10 text-center content-container-narrow">
           <div className="hero-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white text-shadow-strong">
               TravLin Stories
@@ -420,7 +420,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
             <h2 className="text-2xl md:text-3xl mb-8 font-semibold text-white text-shadow">
               Stories • News • Destination Guides • Inspiration
             </h2>
-            <p className="text-xl max-w-5xl mx-auto leading-relaxed text-white text-shadow">
+            <p className="text-xl leading-relaxed text-white text-shadow content-container">
               Discover incredible journeys, insider secrets, and expert travel wisdom that turn dreams into unforgettable adventures. Your next extraordinary escape and dreaming begins here!
             </p>
           </div>
@@ -436,7 +436,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
           <div className="margin-bottom">
             <h2 className="section-heading text-center margin-bottom">Featured Story</h2>
             
-            <div className="max-w-4xl mx-auto">
+            <div className="content-container-narrow">
               <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 bg-white border border-gray-200">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="story-image-container featured-article-image">
@@ -516,7 +516,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
             <SectionDivider />
             <h2 className="section-heading text-center margin-bottom">More Stories</h2>
             
-            <div className="card-grid max-w-7xl mx-auto">
+            <div className="card-grid content-container">
               {visibleArticles.map((post) => (
                 <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white border border-gray-200">
                   <div className="story-image-container story-card-image">
@@ -653,7 +653,7 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
       {/* Subscribe Section */}
       <section className="section-spacing section-light">
         <div className="content-container">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="content-container-text text-center">
             <SectionDivider />
             
             {/* Single Column Newsletter Subscription */}
