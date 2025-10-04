@@ -58,7 +58,7 @@ export default function SEOHead({
     "name": "TravLin Travel",
     "description": "Award-winning travel agency specializing in cruises and luxury travel experiences",
     "url": "https://travlintravel.com.au",
-    "logo": "https://travlintravel.com.au/logo.png",
+    "logo": "https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png",
     "founder": {
       "@type": "Person",
       "name": "Linda Forster"
@@ -133,7 +133,7 @@ export default function SEOHead({
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: window.location.href },
       { property: 'og:site_name', content: 'TravLin Travel' },
-      { property: 'og:image', content: 'https://travlintravel.com.au/og-image.jpg' }
+      { property: 'og:image', content: 'https://res.cloudinary.com/dgpwz1nqr/image/upload/c_fill,w_1200,h_630,f_jpg/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png' }
     ]
 
     ogTags.forEach(tag => {
@@ -151,7 +151,7 @@ export default function SEOHead({
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: finalTitle },
       { name: 'twitter:description', content: finalDescription },
-      { name: 'twitter:image', content: 'https://travlintravel.com.au/twitter-image.jpg' }
+      { name: 'twitter:image', content: 'https://res.cloudinary.com/dgpwz1nqr/image/upload/c_fill,w_1200,h_675,f_jpg/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png' }
     ]
 
     twitterTags.forEach(tag => {
