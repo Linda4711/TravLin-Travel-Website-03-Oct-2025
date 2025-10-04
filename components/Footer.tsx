@@ -23,6 +23,7 @@ interface FooterProps {
 
 export default function Footer({ onContactClick, onNavigateToServices, onNavigateToCruises, onNavigateToTravelOptions, onNavigateToStories, onNavigateToAbout, onNavigateToAI, onNavigateToHome, onNavigateToContact }: FooterProps) {
   const [showTermsPrivacy, setShowTermsPrivacy] = useState(false)
+  const [activeTab, setActiveTab] = useState<'terms' | 'privacy' | 'complaint' | 'customer-acceptance'>('terms')
   const [footerEmail, setFooterEmail] = useState('')
   const [isFooterSubscribing, setIsFooterSubscribing] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -379,7 +380,9 @@ Please add this email to the newsletter mailing list for travel updates and spec
       {/* Terms & Privacy Modal */}
       <TermsPrivacy 
         isOpen={showTermsPrivacy} 
-        onClose={() => setShowTermsPrivacy(false)} 
+        onClose={() => setShowTermsPrivacy(false)}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
       />
     </footer>
   )
