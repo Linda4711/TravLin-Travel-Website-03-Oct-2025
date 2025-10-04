@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react'
 
+// Facebook Debug Instructions:
+// After deploying changes, use Facebook's Sharing Debugger to refresh cache:
+// 1. Go to: https://developers.facebook.com/tools/debug/
+// 2. Enter your URL: https://travlintravel.com.au/TravLin-Stories
+// 3. Click "Debug" then "Scrape Again" to force Facebook to fetch new images
+// 4. For individual articles, use specific article URLs
+
 interface SEOHeadProps {
   title?: string
   description?: string
   page?: 'home' | 'cruises' | 'travel-options' | 'contact' | 'about' | 'stories'
   structuredData?: object
+  ogImage?: string // Dynamic Open Graph image for social sharing
+  ogImageAlt?: string // Alt text for Open Graph image
 }
 
 export default function SEOHead({ 
   title, 
   description, 
   page = 'home',
-  structuredData 
+  structuredData,
+  ogImage,
+  ogImageAlt 
 }: SEOHeadProps) {
   
   const pageData = {
@@ -126,14 +137,39 @@ export default function SEOHead({
     }
     metaKeywords.setAttribute('content', currentPage.keywords)
 
+    // Determine the best Open Graph image - prioritize dynamic image
+    const defaultOgImage = 'https://res.cloudinary.com/dgpwz1nqr/image/upload/c_fill,w_1200,h_630,f_jpg/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png'
+    
+    // For article images, ensure they're properly sized for Facebook sharing
+    let finalOgImage = ogImage || defaultOgImage
+    if (ogImage && !ogImage.includes('c_fill,w_1200,h_630')) {
+      // If it's a Cloudinary image, optimize it for Facebook
+      if (ogImage.includes('cloudinary.com')) {
+        finalOgImage = ogImage.replace('/upload/', '/upload/c_fill,w_1200,h_630,f_jpg/')
+      }
+      // If it's an Unsplash image, add proper sizing parameters
+      else if (ogImage.includes('unsplash.com')) {
+        finalOgImage = `${ogImage}&w=1200&h=630&fit=crop&fm=jpg&q=80`
+      }
+    }
+    
+    const finalOgImageAlt = ogImageAlt || 'TravLin Travel - Expert Cruise & Travel Specialists'
+
     // Add Open Graph tags
     const ogTags = [
       { property: 'og:title', content: finalTitle },
       { property: 'og:description', content: finalDescription },
-      { property: 'og:type', content: 'website' },
+      { property: 'og:type', content: page === 'stories' ? 'article' : 'website' },
       { property: 'og:url', content: window.location.href },
       { property: 'og:site_name', content: 'TravLin Travel' },
-      { property: 'og:image', content: 'https://res.cloudinary.com/dgpwz1nqr/image/upload/c_fill,w_1200,h_630,f_jpg/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png' }
+      { property: 'og:image', content: finalOgImage },
+      { property: 'og:image:secure_url', content: finalOgImage },
+      { property: 'og:image:alt', content: finalOgImageAlt },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:type', content: 'image/jpeg' },
+      { property: 'og:locale', content: 'en_AU' },
+      { property: 'fb:app_id', content: 'your-facebook-app-id' } // Optional - replace with your actual FB app ID
     ]
 
     ogTags.forEach(tag => {
@@ -151,7 +187,8 @@ export default function SEOHead({
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: finalTitle },
       { name: 'twitter:description', content: finalDescription },
-      { name: 'twitter:image', content: 'https://res.cloudinary.com/dgpwz1nqr/image/upload/c_fill,w_1200,h_675,f_jpg/v1759070981/2025_Portrait_on_blue_logo_ojuj1h.png' }
+      { name: 'twitter:image', content: finalOgImage },
+      { name: 'twitter:image:alt', content: finalOgImageAlt }
     ]
 
     twitterTags.forEach(tag => {
@@ -162,6 +199,29 @@ export default function SEOHead({
         document.head.appendChild(twitterElement)
       }
       twitterElement.setAttribute('content', tag.content)
+    })
+
+    // Add additional meta tags for better social sharing
+    const additionalTags = [
+      { name: 'author', content: 'TravLin Travel' },
+      { name: 'robots', content: 'index, follow' },
+      { property: 'article:publisher', content: 'https://www.facebook.com/travlintravel' },
+      { property: 'article:author', content: 'Linda Forster' }
+    ]
+
+    additionalTags.forEach(tag => {
+      const selector = tag.property ? `meta[property="${tag.property}"]` : `meta[name="${tag.name}"]`
+      let element = document.querySelector(selector)
+      if (!element) {
+        element = document.createElement('meta')
+        if (tag.property) {
+          element.setAttribute('property', tag.property)
+        } else {
+          element.setAttribute('name', tag.name)
+        }
+        document.head.appendChild(element)
+      }
+      element.setAttribute('content', tag.content)
     })
 
     // Add structured data
