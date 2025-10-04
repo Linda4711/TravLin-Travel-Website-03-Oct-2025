@@ -198,9 +198,10 @@ export default function Cruises({ onNavigateBack, onNavigateToContact, onNavigat
         className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24"
         style={{
           background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100% 100%), url("https://images.unsplash.com/photo-1592036930568-5c7543f818eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcnVpc2UlMjBzaGlwJTIwZGVzdGluYXRpb24lMjBhenVyZSUyMGxhZ29vbnxlbnwxfHx8fDE3NTg0MzQwMzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
-          backgroundAttachment: 'fixed'
+          backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
+          backgroundPosition: window.innerWidth <= 768 ? 'center 40%' : 'center bottom',
+          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
@@ -347,9 +348,10 @@ export default function Cruises({ onNavigateBack, onNavigateToContact, onNavigat
         className="py-16 bg-white relative overflow-hidden" 
         style={{
           background: `linear-gradient(135deg, rgba(248, 249, 250, 0.75) 0%, rgba(233, 236, 239, 0.65) 100%), url("https://res.cloudinary.com/dgpwz1nqr/image/upload/v1759077911/b987ead2-b0b6-4c13-83fa-83894a3e671e_hvxzwq.jpg")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
+          backgroundPosition: window.innerWidth <= 768 ? 'center 30%' : 'center',
+          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         {/* Background decorative elements */}
