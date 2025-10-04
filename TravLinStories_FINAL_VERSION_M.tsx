@@ -295,14 +295,14 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
           onNavigateToStories={handleNavigateToStories}
         />
 
-        {/* Article Hero Image */}
+        {/* Article Hero Image - Mobile Optimized */}
         <section 
-          className="relative h-[85vh] flex items-end text-white"
+          className="relative h-[85vh] flex items-end text-white article-hero-mobile-optimized"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15)), url('${article.image}')`,
-            backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
-            backgroundPosition: window.innerWidth <= 768 ? 'center 35%' : 'center',
-            backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
             backgroundRepeat: 'no-repeat'
           }}
         >
