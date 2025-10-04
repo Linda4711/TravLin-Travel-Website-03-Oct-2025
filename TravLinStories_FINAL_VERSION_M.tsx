@@ -300,9 +300,10 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
           className="relative h-[85vh] flex items-end text-white"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15)), url('${article.image}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
+            backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
+            backgroundPosition: window.innerWidth <= 768 ? 'center 35%' : 'center',
+            backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+            backgroundRepeat: 'no-repeat'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
@@ -440,9 +441,10 @@ Please add this email to the TravLin Stories newsletter mailing list for travel 
         className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24"
         style={{
           backgroundImage: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100% 100%), url("${storiesHeroImage}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
+          backgroundPosition: window.innerWidth <= 768 ? 'center 30%' : 'center',
+          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
