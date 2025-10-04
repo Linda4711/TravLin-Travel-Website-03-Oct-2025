@@ -1,48 +1,44 @@
-import React, { useState } from 'react'
-import { createPortal } from 'react-dom'
-import { Card, CardContent } from './ui/card'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Label } from './ui/label'
-import { Checkbox } from './ui/checkbox'
-import { X, FileText, Shield, AlertTriangle, Download, Mail, CheckCircle, User, Phone, Calendar, Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
-import emailjs from '@emailjs/browser'
+import React, { useState } from 'react';
+import { X, FileText, Download, Calendar, User, Phone, Mail, Building2 } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Checkbox } from './ui/checkbox';
+import { toast } from 'sonner';
 
 interface TermsPrivacyProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
+  activeTab: 'terms' | 'privacy' | 'complaint' | 'customer-acceptance';
+  onTabChange: (tab: 'terms' | 'privacy' | 'complaint' | 'customer-acceptance') => void;
 }
 
 interface CustomerAcceptanceForm {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  businessName?: string
-  agreedToTerms: boolean
-  agreedToFees: boolean
-  agreedToPrivacy: boolean
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  travelDate: string;
+  acceptTerms: boolean;
+  acceptMarketing: boolean;
+  signature: string;
 }
 
-export default function TermsPrivacy({ isOpen, onClose }: TermsPrivacyProps) {
-  const [showAcceptanceForm, setShowAcceptanceForm] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submissionComplete, setSubmissionComplete] = useState(false)
+const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab, onTabChange }) => {
   const [form, setForm] = useState<CustomerAcceptanceForm>({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    businessName: '',
-    agreedToTerms: false,
-    agreedToFees: false,
-    agreedToPrivacy: false
-  })
+    address: '',
+    travelDate: '',
+    acceptTerms: false,
+    acceptMarketing: false,
+    signature: ''
+  });
 
-  // Production-safe configuration
-  const CONTACT_EMAIL = 'hello@travlintravel.com.au'
-
+  // PDF Links - EXACT filenames from GitHub repository
   const pdfLinks = {
     serviceFees: '/TravLin Travel_Schedule of Fees+ATIA Fee Flyer_JUL25.pdf',
     travelInfo: '/TravLin Travel_Travel Information ONLY_JUL25.pdf',
@@ -55,751 +51,235 @@ export default function TermsPrivacy({ isOpen, onClose }: TermsPrivacyProps) {
     setForm(prev => ({
       ...prev,
       [field]: value
-    }))
-  }
+    }));
+  };
 
-  const handleSubmitAcceptance = async () => {
-    // Validation
-    if (!form.firstName || !form.lastName || !form.email) {
-      toast.error('Please fill in all required fields')
-      return
+  const handleSubmitCustomerAcceptance = () => {
+    // Validate required fields
+    if (!form.firstName || !form.lastName || !form.email || !form.phone || !form.acceptTerms || !form.signature) {
+      toast.error('Please fill in all required fields and accept the terms.');
+      return;
     }
 
-    if (!form.agreedToTerms || !form.agreedToFees || !form.agreedToPrivacy) {
-      toast.error('Please agree to all terms and conditions')
-      return
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error('Please enter a valid email address.');
+      return;
     }
 
-    setIsSubmitting(true)
-
-    try {
-      // Create acceptance record
-      const acceptanceData = {
-        customer: {
-          name: `${form.firstName} ${form.lastName}`,
-          email: form.email,
-          phone: form.phone,
-          businessName: form.businessName || 'N/A'
-        },
-        acceptance: {
-          timestamp: new Date().toLocaleString('en-AU', { 
-            timeZone: 'Australia/Melbourne',
-            year: 'numeric',
-            month: '2-digit', 
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-          }),
-          acceptanceId: `TLT-${Date.now()}`,
-          documentsAccepted: ['Service Fees', 'Travel Information', 'Customer Acceptance', 'Privacy Policy'],
-          ipAddress: 'Hidden for privacy',
-          userAgent: navigator.userAgent.substring(0, 100) // Limit length
-        }
-      }
-
-      // Store in localStorage for customer reference
-      localStorage.setItem('travlin-acceptance-record', JSON.stringify(acceptanceData))
-
-      // Send email notification via EmailJS
-      try {
-        const emailParams = {
-          // Primary EmailJS fields
-          to_email: 'hello@travlintravel.com.au',
-          from_name: acceptanceData.customer.name,
-          from_email: acceptanceData.customer.email,
-          subject: `Customer Acceptance Received - ${acceptanceData.acceptance.acceptanceId}`,
-          
-          // Customer details
-          customer_name: acceptanceData.customer.name,
-          customer_surname: acceptanceData.customer.name.split(' ').pop() || acceptanceData.customer.name, // Extract surname
-          customer_first_name: acceptanceData.customer.name.split(' ')[0] || acceptanceData.customer.name, // Extract first name
-          customer_email: acceptanceData.customer.email,
-          customer_phone: acceptanceData.customer.phone || 'Not provided',
-          business_name: acceptanceData.customer.businessName || 'Private Individual',
-          
-          // Acceptance details
-          acceptance_id: acceptanceData.acceptance.acceptanceId,
-          acceptance_reference: acceptanceData.acceptance.acceptanceId,
-          timestamp: acceptanceData.acceptance.timestamp,
-          documents_accepted: acceptanceData.acceptance.documentsAccepted.join(', '),
-          user_agent: acceptanceData.acceptance.userAgent,
-          ip_address: acceptanceData.acceptance.ipAddress || 'Hidden for privacy',
-          
-          // Comprehensive message for email body
-          message: `NEW CUSTOMER ACCEPTANCE RECEIVED
-
-CUSTOMER DETAILS:
-Name: ${acceptanceData.customer.name}
-Surname: ${acceptanceData.customer.name.split(' ').pop() || acceptanceData.customer.name}
-Email: ${acceptanceData.customer.email}
-Phone: ${acceptanceData.customer.phone || 'Not provided'}
-Business: ${acceptanceData.customer.businessName || 'Private Individual'}
-Travel for Business: ${acceptanceData.customer.travelForBusiness ? 'Yes' : 'No'}
-
-ACCEPTANCE DETAILS:
-Acceptance Reference: ${acceptanceData.acceptance.acceptanceId}
-Timestamp: ${acceptanceData.acceptance.timestamp}
-Documents Accepted: ${acceptanceData.acceptance.documentsAccepted.join(', ')}
-IP Address: ${acceptanceData.acceptance.ipAddress || 'Hidden for privacy'}
-User Agent: ${acceptanceData.acceptance.userAgent}
-
-TERMS AND CONDITIONS ACCEPTED:
-${acceptanceData.acceptance.documentsAccepted.map(doc => `✓ ${doc}`).join('\n')}
-
-This customer has completed the legal acceptance process and can now proceed with bookings.`,
-          
-          // Additional template fields for backup
-          full_name: acceptanceData.customer.name,
-          email: acceptanceData.customer.email,
-          phone: acceptanceData.customer.phone || 'Not provided',
-          company: acceptanceData.customer.businessName || 'Private Individual',
-          reference_id: acceptanceData.acceptance.acceptanceId,
-          date_accepted: acceptanceData.acceptance.timestamp,
-          accepted_documents: acceptanceData.acceptance.documentsAccepted.join(', ')
-        }
-
-        await emailjs.send(
-          'service_rlnjyuj',
-          'template_270l5y4',
-          emailParams,
-          'GY6ImN3fkI91A6mGw'
-        )
-
-        console.log('✅ Customer acceptance email sent successfully')
-      } catch (emailError) {
-        console.error('📧 EmailJS error:', emailError)
-        // Don't fail the entire process if email fails
-      }
-
-      // Brief delay for UX
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      toast.success(
-        `Terms accepted successfully! Please contact us at ${CONTACT_EMAIL} with your acceptance ID: ${acceptanceData.acceptance.acceptanceId}`,
-        { duration: 8000 }
-      )
-
-      setSubmissionComplete(true)
-
-    } catch (error) {
-      toast.error('Failed to submit acceptance. Please try again.')
-      console.error('Acceptance submission error:', error)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const resetForm = () => {
+    // Show success message
+    toast.success('Customer Acceptance Form submitted successfully! We will be in touch soon.');
+    
+    // Reset form
     setForm({
       firstName: '',
       lastName: '',
       email: '',
       phone: '',
-      businessName: '',
-      agreedToTerms: false,
-      agreedToFees: false,
-      agreedToPrivacy: false
-    })
-    setShowAcceptanceForm(false)
-    setSubmissionComplete(false)
-  }
+      address: '',
+      travelDate: '',
+      acceptTerms: false,
+      acceptMarketing: false,
+      signature: ''
+    });
+    
+    // Close modal
+    onClose();
+  };
 
-  const handleClose = () => {
-    resetForm()
-    onClose()
-  }
-
-  const modalContent = () => {
-    if (submissionComplete) {
-      return (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
-          <Card className="w-full max-w-md bg-white shadow-2xl border border-gray-300">
-            <CardContent className="p-4 md:p-6 text-center">
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
-                <CheckCircle className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">Terms Accepted Successfully!</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Thank you, {form.firstName}! Please contact us at {CONTACT_EMAIL} with your acceptance ID for next steps.
-                Your acceptance ID is: <span className="font-mono text-blue-600 text-xs">TLT-{Date.now()}</span>
-              </p>
-              <div className="space-y-2">
-                <Button onClick={handleClose} className="w-full text-sm" size="sm">
-                  Continue Planning Your Trip
-                </Button>
-                <Button variant="outline" onClick={resetForm} className="w-full text-sm" size="sm">
-                  Submit Another Acceptance
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )
-    }
-
-    if (showAcceptanceForm) {
-      return (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
-          <Card className="w-full max-w-2xl max-h-[95vh] md:max-h-[90vh] overflow-hidden bg-white shadow-2xl border border-gray-300">
-            <div className="flex items-center justify-between p-3 md:p-4 border-b bg-gray-50">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-lg md:text-xl font-bold text-gray-800">Customer Acceptance Form</h2>
-                  <p className="text-xs md:text-sm text-gray-500">Complete to proceed with booking</p>
-                </div>
-              </div>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowAcceptanceForm(false)}
-                className="text-gray-500 hover:text-gray-700 h-8 w-8"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            </div>
-            
-            <CardContent className="p-3 md:p-5 overflow-y-auto max-h-[calc(95vh-160px)] md:max-h-[calc(90vh-180px)] bg-white">
-              <div className="space-y-4">
-                {/* Customer Information */}
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-gray-800 flex items-center gap-2 text-sm">
-                    <User className="w-4 h-4" />
-                    Customer Information
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <Label htmlFor="firstName" className="text-xs">First Name *</Label>
-                      <Input
-                        id="firstName"
-                        value={form.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        placeholder="Enter your first name"
-                        required
-                        className="h-8"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName" className="text-xs">Last Name *</Label>
-                      <Input
-                        id="lastName"
-                        value={form.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                        placeholder="Enter your last name"
-                        required
-                        className="h-8"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email" className="text-xs">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      placeholder="Enter your email address"
-                      required
-                      className="h-8"
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <Label htmlFor="phone" className="text-xs">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={form.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                        placeholder="+61 xxx xxx xxx"
-                        className="h-8"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="businessName" className="text-xs">Business Name (Optional)</Label>
-                      <Input
-                        id="businessName"
-                        value={form.businessName}
-                        onChange={(e) => handleInputChange('businessName', e.target.value)}
-                        placeholder="Company/Organization name"
-                        className="h-8"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Terms Acceptance */}
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-gray-800 flex items-center gap-2 text-sm">
-                    <Shield className="w-4 h-4" />
-                    Terms & Conditions Acceptance
-                  </h3>
-                  
-                  <div className="space-y-3 p-3 bg-gray-50 rounded">
-                    <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="agreeTerms"
-                        checked={form.agreedToTerms}
-                        onCheckedChange={(checked) => handleInputChange('agreedToTerms', !!checked)}
-                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-                      />
-                      <Label htmlFor="agreeTerms" className="text-xs leading-relaxed">
-                        I have read and agree to the <a href={pdfLinks.travelInfo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Travel Information & Terms of Service</a> *
-                      </Label>
-                    </div>
-                    
-                    <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="agreeFees"
-                        checked={form.agreedToFees}
-                        onCheckedChange={(checked) => handleInputChange('agreedToFees', !!checked)}
-                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-                      />
-                      <Label htmlFor="agreeFees" className="text-xs leading-relaxed">
-                        I have read and agree to the <a href={pdfLinks.serviceFees} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Schedule of Professional Service Fees</a> *
-                      </Label>
-                    </div>
-                    
-                    <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="agreePrivacy"
-                        checked={form.agreedToPrivacy}
-                        onCheckedChange={(checked) => handleInputChange('agreedToPrivacy', !!checked)}
-                        className="mt-0.5 rounded-none data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-                      />
-                      <Label htmlFor="agreePrivacy" className="text-xs leading-relaxed">
-                        I have read and agree to the <a href={pdfLinks.customerAcceptance} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Customer Acceptance Form</a> *
-                      </Label>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Legal Notice */}
-                <div className="bg-blue-50 p-3 rounded border border-blue-200">
-                  <p className="text-xs text-blue-700">
-                    <strong>Legal Notice:</strong> By submitting this form, you acknowledge that any payment for travel components constitutes acceptance of both agency and supplier terms and conditions. This acceptance will be recorded for your reference.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-            
-            <div className="p-3 md:p-4 border-t bg-gray-50">
-              <div className="flex gap-2">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setShowAcceptanceForm(false)}
-                  className="flex-1 text-xs md:text-sm"
-                  size="sm"
-                >
-                  Cancel
-                </Button>
-                <Button 
-                  onClick={handleSubmitAcceptance}
-                  disabled={isSubmitting || !form.agreedToTerms || !form.agreedToFees || !form.agreedToPrivacy}
-                  className="flex-1 text-xs md:text-sm"
-                  style={{ backgroundColor: 'var(--brand-orange)' }}
-                  size="sm"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      <CheckCircle className="w-3 h-3 mr-1" />
-                      Accept Terms & Continue
-                    </>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </div>
-      )
-    }
-
-    return (
-      <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-2 md:p-4" style={{ zIndex: 999999, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.85)' }}>
-        <Card className="w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-hidden bg-white shadow-2xl border border-gray-300">
-          <div className="flex items-center justify-between p-3 md:p-4 border-b bg-gray-50">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--brand-blue)' }}>
-                <FileText className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h2 className="text-lg md:text-xl font-bold text-gray-800">Terms & Privacy</h2>
-                <p className="text-xs md:text-sm text-gray-500">Effective 01 Jul 2025</p>
-              </div>
-            </div>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleClose}
-              className="text-gray-500 hover:text-gray-700 h-8 w-8"
+  return (
+    <div 
+      className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-[999999]"
+      style={{ zIndex: 999999 }}
+    >
+      <div 
+        className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+        style={{ zIndex: 999999 }}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+          <div className="flex space-x-6">
+            <button
+              onClick={() => onTabChange('terms')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'terms' 
+                  ? 'text-blue-600 border-b-2 border-blue-600' 
+                  : 'text-gray-600 hover:text-blue-600'
+              }`}
             >
-              <X className="w-4 h-4" />
-            </Button>
+              Terms & Conditions
+            </button>
+            <button
+              onClick={() => onTabChange('privacy')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'privacy' 
+                  ? 'text-blue-600 border-b-2 border-blue-600' 
+                  : 'text-gray-600 hover:text-blue-600'
+              }`}
+            >
+              Privacy Policy
+            </button>
+            <button
+              onClick={() => onTabChange('complaint')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'complaint' 
+                  ? 'text-blue-600 border-b-2 border-blue-600' 
+                  : 'text-gray-600 hover:text-blue-600'
+              }`}
+            >
+              Complaint Process
+            </button>
+            <button
+              onClick={() => onTabChange('customer-acceptance')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'customer-acceptance' 
+                  ? 'text-blue-600 border-b-2 border-blue-600' 
+                  : 'text-gray-600 hover:text-blue-600'
+              }`}
+            >
+              Customer Acceptance
+            </button>
           </div>
-          
-          <CardContent className="p-3 md:p-5 overflow-y-auto max-h-[calc(95vh-160px)] md:max-h-[calc(90vh-180px)] bg-white">
-            <div className="space-y-4">
-              {/* Quick Access Downloads */}
-              <div className="bg-blue-50 p-3 rounded border border-blue-200">
-                <h3 className="font-semibold text-blue-800 mb-2 flex items-center gap-2 text-sm">
-                  <Download className="w-4 h-4" />
-                  Document Downloads
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          {activeTab === 'terms' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Terms & Conditions</h2>
+              
+              {/* PDF Download Links */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+                  <FileText className="w-5 h-5 mr-2" />
+                  Important Documents
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                  <a 
-                    href={pdfLinks.serviceFees} 
-                    target="_blank" 
+                <div className="space-y-2">
+                  <a
+                    href={pdfLinks.serviceFees}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
                   >
-                    <FileText className="w-3 h-3" />
-                    Schedule of Professional Service Fees
+                    <Download className="w-4 h-4 mr-2" />
+                    Schedule of Fees & ATIA Fee Flyer
                   </a>
-                  <a 
-                    href={pdfLinks.travelInfo} 
-                    target="_blank" 
+                  <a
+                    href={pdfLinks.travelInfo}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
                   >
-                    <FileText className="w-3 h-3" />
-                    Travel Information & Terms
+                    <Download className="w-4 h-4 mr-2" />
+                    Travel Information
                   </a>
-                  <a 
-                    href={pdfLinks.customerAcceptance} 
-                    target="_blank" 
+                  <a
+                    href={pdfLinks.customerAcceptance}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-xs p-2 bg-white rounded border hover:border-blue-300 transition-colors"
+                    className="flex items-center text-blue-600 hover:text-blue-800 transition-colors"
                   >
-                    <FileText className="w-3 h-3" />
+                    <Download className="w-4 h-4 mr-2" />
                     Customer Acceptance Form
                   </a>
                 </div>
               </div>
 
-
-              {/* Main Content */}
-              <div 
-                className="prose prose-sm max-w-none text-xs leading-relaxed" 
-                style={{ 
-                  fontSize: '12px', 
-                  lineHeight: '1.5',
-                  '--prose-body': '12px',
-                  '--prose-headings': '14px'
-                }}
-              >
-                <h2 className="text-lg font-bold text-gray-800 mb-3">Terms & Conditions</h2>
-                
-                <p className="mb-3 text-xs leading-relaxed">
-                  Please read the following terms and conditions carefully.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  You must not make any booking unless you are 18 years of age or older and understand and agree with the following terms and conditions.
-                  These terms and conditions apply to bookings you make with a Consultant (instore, over the phone or by email) as well as online bookings made via our website.
-                  These terms and conditions govern our relationship with you. Once we accept a booking from you on behalf of a Supplier, you will also have a separate contract with the Supplier, which will be governed by other terms and conditions. It is your responsibility to make yourself aware of those other terms and conditions.
-                </p>
-
-                {/* Executive Summary */}
-                <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 mb-4">
-                  <h3 className="text-sm font-semibold text-yellow-800 mb-2 flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4" />
-                    Executive Summary
-                  </h3>
-                  <div className="text-xs text-yellow-700 space-y-1">
-                    <p>Although you should read all of the terms and conditions, the following is a summary of the most important:</p>
-                    <ul className="list-disc list-inside space-y-0.5 ml-3">
-                      <li>Prices, including, in some cases, of confirmed bookings, may be subject to change.</li>
-                      <li>Some confirmed bookings are non-refundable if cancelled by you and it is your responsibility to check if this applies.</li>
-                      <li>We will be entitled to retain our service fees even if a booking is cancelled or does not proceed for any reason which is not our fault.</li>
-                      <li>It is your responsibility to make yourself aware of all information relevant to your travel plans, including but not limited to visa requirements and health precautions.</li>
-                      <li>We are not your agent and may receive additional fees or other incentives from Suppliers.</li>
-                      <li>We are not liable for the accuracy of any published Supplier content including websites and brochures.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Prices and Taxes</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  All prices that we quote are in Australian Dollars and based on twin share accommodation unless otherwise stated. Please note that prices quoted are subject to change at the discretion of the Supplier prior to booking.
-                  Price changes may occur after booking because of matters outside our control which increase the cost of the Product. Such factors include adverse currency fluctuations, fuel surcharges, taxes and airfare increases.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  Please contact your Consultant for up-to-date prices. Even if paid in full, a price may change because of matters outside our control.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  Prices include all applicable taxes requiring payment prior to departure, and may be subject to adjustment in the event of an increase in those taxes. On other occasions, you may be liable for taxes in addition to the quoted price of the Product. For example, there may be a local tax charged at some airports or resorts.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Products</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  All Products that we quote on are subject to availability and may be withdrawn or varied by the Supplier without notice.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Fees and Surcharges</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees, credit card merchant fees,
-                  insurance claim processing fees or fees for adhoc services performed as required. You may see our current schedule of professional service fees at service-fees.
-                </p>
-
+              <div className="prose max-w-none">
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Service Fees</h3>
                 <p className="mb-4">
-                  Payment by credit card will incur a surcharge to offset our cost of acceptance of payment by credit card. The surcharge varies depending on credit card type, it is your responsibility to advise the correct credit card type to ensure that the appropriate surcharge is applied. We accept no responsibility for an inappropriate surcharge being applied if the correct card type has not been advised, and the surcharge applied shall not be refundable.
+                  TravLin Travel charges service fees in accordance with our Schedule of Fees. These fees cover the cost of professional travel planning, booking services, and ongoing support throughout your travel journey.
                 </p>
 
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Booking Terms</h3>
                 <p className="mb-4">
-                  You authorise us to charge all monies payable by you in relation to any booking we make on your behalf or other services we have procured or provided to the credit card or debit card designated by you. If payment is not received from the card issuer or its agents for any reason, you agree to pay us all amounts due immediately on demand.
+                  All bookings are subject to availability and confirmation by travel suppliers. Deposits may be required to secure bookings, and full payment terms will be advised at the time of booking.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Change and Cancellation Fees</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Cancellation Policy</h3>
                 <p className="mb-4">
-                  Be aware that some confirmed bookings are not refundable if cancelled, and also may not be transferable to another date or otherwise changed. Alternatively, a change may only be permissible subject to payment of an additional fee or charge. It is your responsibility to check if a booking is non-refundable or will incur charges for changing it before placing the booking.
+                  Cancellation terms vary by supplier and product type. We will advise you of specific cancellation conditions at the time of booking. Service fees may apply to cancellations.
                 </p>
 
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Travel Insurance</h3>
                 <p className="mb-4">
-                  Changes and cancellations of confirmed bookings may incur fees from Suppliers in addition to our service fees. Suppliers' fees are outlined in their relevant terms and conditions.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Refunds</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  Your entitlement to a refund for cancelled bookings is subject to the relevant Supplier's terms and conditions.
-                  If you are entitled to a refund then, subject to the Supplier's terms and conditions, we will arrange for it to be supplied to us on your behalf, unless we expressly agree with you otherwise.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  If we are managing or arranging a refund for a cancelled booking on your behalf it will not be paid to you until the Supplier provides the refund to us, and we will not be liable for any delay on the part of the Supplier. Be aware that typically airlines will take between 60-90 days to process a refund. Please note that if we are entitled to a service fee for placing a booking, we will remain entitled to this fee if you cancel the booking or the Supplier fails to provide you with the Product for any reason (other than our default), including in an event of Force Majeure. We will be entitled to deduct our service fee from any refund we receive on your behalf before remitting the balance to you.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Deposits and Payments</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  You will be required to pay a deposit (or deposits) when booking. The deposit amount varies depending on the Product booked and lead time to travel. In some instances, full payment is required at the time of booking and your consultant will advise the deposit amount at the time of booking. All deposits are non-refundable for changes of mind or cancellations by you (subject to your rights under the Australian Consumer Law). Where a deposit has been collected, final payment is required no later than six weeks prior to departure. Failure to make payment by the due date may result in your booking being cancelled and deposits forfeited.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  Payments made by direct deposit may take up to three business days to process. If you are paying by this method, you will need to make the payment at least three business days prior to the actual due date. You must notify you Consultant of your payment once it has been made.
-                </p>
-
-                <p className="mb-3 text-xs leading-relaxed">
-                  Payments made by personal cheque (excluding bank cheques) require five business days to process. If you are paying by this method, you will need to make the payment at least five business days prior to the actual due date.
-                  You agree not to stop payment of the cheque even when you cancel a booking. You agree that we may apply the proceeds of the cheque to satisfy any liability you have to us or to a Supplier, including any liability in respect of cancellation fees, before refunding the balance to you.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Information</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  Our responsibility is solely to arrange a booking of a Product in accordance with your instructions. It is your responsibility to make yourself aware of all information that it
-                  is necessary or desirable to know in order to make optimum use of the Product and to undertake travel generally. We strongly recommend that you read our travel information at travel-information which may be relevant, especially in relation to passport and visa requirements. Please note that this information is provided as a guide only, and although it is accurate to the best of our knowledge, we do not warrant that it is completely up-to-date at all times. Further, we do not warrant that it is comprehensive and it may not address a topic that is relevant to your travel plans. It is your responsibility to further investigate and confirm any matters that are applicable to you.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Special Requirements</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  You must inform your consultant regarding any special requirements you may have for your travel arrangements such as special meal and seating requests, room type or disabled access prior to making a booking. If you do not specifically inform us we will assume that you do not have any such requirements, and the booking will be made on that basis.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Frequent Flyer and Loyalty Programs</h3>
-                <p className="mb-3 text-xs leading-relaxed">
-                  When booking with one of our Consultants, it is your responsibility to let them know your frequent flyer membership details (or other applicable loyalty program details) for inclusion in your booking. Notwithstanding that your details may be included in the booking, we cannot guarantee that the Supplier will credit you with points for your booking.
-                </p>
-
-                <h3 className="text-sm font-semibold text-gray-800 mt-4 mb-2">Travel Documents</h3>
-                <p className="mb-4">
-                  If you have booked with a consultant, it is your responsibility to collect all travel documents from us prior to travel unless your consultant is home based/mobile who can come to you. As a general rule, your travel documents will be available for collection two weeks prior to departure, however this will depend on your individual arrangements. Please contact your consultant to confirm when your travel documents are ready for collection. If you have booked online, you should print out and retain your travel documents as provided to you by the website (or in a confirmation email we send you). You must review your travel documents carefully and advise us immediately of any errors in names, dates or timings.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Agency</h3>
-                <p className="mb-4">
-                  We act as an agent for and sell various travel related products as an agent on behalf of numerous transport, accommodation and other service providers, such as airlines, coach, rail and cruise line operators, as well as travel wholesalers ("Suppliers"). We may receive fees, commissions, gifts or financial incentives from Suppliers in respect of Products we advise you of or arrange on your behalf. Any brochures provided by us to you are supplied by Suppliers, or are prepared by us based on content supplied by Suppliers, and we accept no liability for errors in that material. Your oral or written instructions to us are authority for us to make travel bookings on your behalf and to arrange relevant contracts between you and the applicable Supplier. Notwithstanding this authority, we are not your agent and do not have any fiduciary duty to you. We exercise care in the selection of reputable Suppliers, but we are not ourselves a provider of travel services and have no control over, or liability for, the Products provided by the Suppliers, who are third parties. All bookings are made on your behalf subject to the terms and conditions, including conditions of carriage and limitations of liability, imposed by the Supplier. We recommend that you read them before finalising the transaction and we can provide you with copies of the relevant terms and conditions on request. Your legal rights and remedies in connection with the provision of Products are against the Supplier and, except to the extent a problem is directly and primarily caused by fault on our part, are not against us. Specifically, if for any reason (excluding fault on our part) any Supplier is unable to provide the Product for which you have contracted either at all, or to the requisite standard, your remedies are against that Supplier and not against us.
+                  We strongly recommend comprehensive travel insurance for all bookings. Travel insurance can protect you against unexpected events that may affect your travel plans.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Liability</h3>
                 <p className="mb-4">
-                  To the extent permitted by law, we do not accept any liability in contract, tort or otherwise for any injury, damage, loss (including consequential loss), delay, additional expense or inconvenience caused directly or indirectly by the acts, omissions or default, whether negligent or otherwise, of third party providers over whom we have no direct control, an event of Force Majeure affecting you, us or a Supplier or any other event which is beyond our control or which is not preventable by reasonable diligence on our part. Under circumstances where our liability cannot be excluded and where liability may be lawfully limited, such liability is limited to the remedies required of us under applicable law (including the Australian Consumer Law). In particular, we disclaim any liability for any consequential loss, including loss of enjoyment or amenity. This liability clause is subject to your rights under the Australian Consumer Law and nothing in these terms and conditions is intended to limit any rights you may have under the Competition and Consumer Act 2010 (Cth).
-                  Without limitation of the disclaimer of liability in the previous paragraph, any obligation we have to you will be suspended during the time and to the extent that we are prevented from, or delayed in, complying with that obligation by an event of Force Majeure.
-                  Your rights with respect to a confirmed booking affected by an event of Force Majeure will be subject to the terms and conditions of the relevant Supplier.
+                  TravLin Travel acts as an agent for travel suppliers and is not responsible for the acts or omissions of suppliers. Our liability is limited to the service fees paid to us.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'privacy' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Privacy Policy</h2>
+              
+              <div className="prose max-w-none">
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Information We Collect</h3>
+                <p className="mb-4">
+                  We collect personal information necessary to provide our travel services, including names, contact details, passport information, and travel preferences.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Governing Law</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">How We Use Your Information</h3>
                 <p className="mb-4">
-                  If any dispute arises between you and us, the laws applicable in VIC will apply. You irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of VIC, and waive any right that you may have to object to an action being brought in those courts.
+                  Your personal information is used to arrange travel services, communicate with you about your bookings, and provide customer support. We may also use your information for marketing purposes with your consent.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Summary of Obligations</h3>
-                <p className="mb-4">Before making a booking, it is important that you meet the following requirements:</p>
-                <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                  <li>You are over the age of eighteen (18) and have sufficient funds to pay for the travel services.</li>
-                  <li>You have read our terms and conditions and if booking for third parties warrant that you have their authority to do so and have conveyed these terms and conditions to them. You agree to indemnify us and the Supplier against any claims from third parties who have not in fact been properly informed.</li>
-                  <li>You have read the terms and conditions of any applicable Suppliers and agree to be bound by those.</li>
-                  <li>You are responsible for checking the accuracy of all documents provided to you.</li>
-                  <li>You are responsible for confirming departure times of any booked services at least 24 hours prior to travel.</li>
-                  <li>You warrant and acknowledge that you have accessed the Smartraveller website http://smartraveller.gov.au for any specific information in relation to your intended destination.</li>
-                  <li>You accept that passport, visas and other required identification documents are your responsibility.</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Definitions</h3>
-                <div className="mb-4 space-y-2">
-                  <p><strong>"we" and "us"</strong> means TravLin Travel (ABN 69 613 027 062), and where the context permits, its Consultants.</p>
-                  <p><strong>"Consultant"</strong> means an employee of TravLin Travel, with authority to book Products.</p>
-                  <p><strong>"you"</strong> means a person who makes a booking for a Product with us.</p>
-                  <p><strong>"your Consultant"</strong> means the particular Consultant or Consultants with whom you negotiate the booking of a Product.</p>
-                  <p><strong>"Supplier"</strong> means a third party company or person who provides Products, including a wholesaler of such Products.</p>
-                  <p><strong>"Product"</strong> means travel and holiday related products and services including accommodation, leisure activities and various forms of transport, including packaged combinations thereof.</p>
-                  <p><strong>"Travel documents"</strong> means any document (whether in electronic form or otherwise) used to confirm an arrangement with a Supplier, including (without limitation) airline tickets, hotel vouchers and tour vouchers.</p>
-                  <p><strong>"Force Majeure"</strong> means an act of God, peril of the sea, accident of navigation, war (including civil war), sabotage, riot, insurrection, civil commotion, coup d'état, national emergency, martial law, fire (including wildfire), explosion, lightning, flood, tsunami, cyclone, hurricane, tornado or other major weather event, earthquake, landslide, volcanic eruption or other natural catastrophe, epidemic, pandemic, quarantine, outbreaks of infectious disease or any other public health crisis, radiation or radioactive contamination, national strike or other major lack of availability of labour, raw materials or energy beyond the control of the affected party. For the avoidance of doubt, the inability of a party to make a profit or avoid a financial loss, changes in market prices or conditions, or a party's inability to perform its obligations due to insufficiency of finance does not in itself constitute Force Majeure.</p>
-                </div>
-
-                <div className="bg-orange-50 p-3 rounded-lg border border-orange-200 mb-4">
-                  <p className="text-xs text-orange-700">
-                    <strong>To proceed with your booking,</strong> please complete our customer acceptance form available at the bottom of this page to acknowledge that you have read and agree to our terms and conditions and professional service fees. Please note that any payment of any travel component is considered as your acknowledgement that you have read, understood and accepted both agency and supplier Terms and Conditions.
-                  </p>
-                </div>
-
-                {/* Privacy Section */}
-                <h2 className="text-xl font-bold text-gray-800 mt-8 mb-4">Privacy</h2>
-                
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Information Sharing</h3>
                 <p className="mb-4">
-                  TravLin Travel, its businesses, websites and apps operate from Australia and this policy provides information in accordance with our obligations under the Privacy Act. We understand that you care how your personal information is handled and we appreciate your trust that we will do so carefully and sensibly and in compliance with the Australian Privacy Principles of the Privacy Act 1988.
+                  We share your information with travel suppliers (airlines, hotels, tour operators) as necessary to complete your bookings. We do not sell your personal information to third parties.
                 </p>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Your personal information</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Data Security</h3>
                 <p className="mb-4">
-                  TravLin Travel and its associated entities may, in the course of arranging travel for you, receive and hold personal information about you, that includes but is not limited to, your full name, your contact details, your business or home address, your date of birth, your passport data, details of any loyalty program memberships, health condition and medical history, concession card number or driver's license number and other data relevant to the services – general and personalised that we provide you.
+                  We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
                 </p>
 
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Your Rights</h3>
                 <p className="mb-4">
-                  In these circumstances, you agree that transacting travel bookings authorises us to disclose only the required personal information when required, in order to finalise these travel bookings on your behalf. TravLin Travel will normally only collect your sensitive information with your consent and where it is required for your travel arrangements such as allergies, disabilities that requires special arrangements or in the event of an accident.
-                  We may also collect your personal information from others who make a booking on your behalf and they should be authorised to provide us with your information.
+                  You have the right to access, correct, or delete your personal information. You may also opt out of marketing communications at any time.
                 </p>
 
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Contact Us</h3>
                 <p className="mb-4">
-                  Your personal information will be collected when you deal with us over the telephone, send us a letter or an email or visit our website, complete an online registration form, provide information to complete a booking, register as a member, or participate in one of our surveys, competitions or promotions. When you access our website, use any of our mobile applications or open an electronic communication from TravLin Travel, servers may record data regarding your device and the network you are using to connect with us, including your IP address. An IP address is a series of numbers which identify your computer, and which are generally assigned when you access the internet. Alone, IP addresses are not personal information, but we may link IP addresses to other personal information we hold about you and use it for the purpose of fraud prevention and protection. We store personal information in a combination of secure computer storage facilities, and paper-based facilities.
+                  If you have any questions about this privacy policy or how we handle your personal information, please contact us at info@travlintravel.com.au or call (07) 3040 0000.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'complaint' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Complaint Process</h2>
+              
+              <div className="prose max-w-none">
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Making a Complaint</h3>
+                <p className="mb-4">
+                  If you have a complaint about our services, we encourage you to contact us directly so we can resolve the issue promptly. You can reach us by phone, email, or in writing.
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Our Complaint Resolution Process</h3>
+                <p className="mb-4">
+                  We are committed to resolving complaints fairly and efficiently. Where possible, we will attempt to resolve your complaint at the first point of contact. If we are unable to resolve your complaint at the first point of contact, we will undertake an investigation of your complaint and provide you with our findings.
                 </p>
 
                 <p className="mb-4">
-                  Personal information in email we receive from you, including email addresses, will only be used for the purposes given and are subject to the conditions set out in this privacy statement. However, communications over the Internet are inherently insecure. Sending personal information in an email remains entirely at your own risk and TravLin Travel will not be responsible for any unauthorised use of this information by third parties.
-                  We may collect information on website activity, such as the number of visitors, the number of pages viewed, navigation patterns, what systems users have and the date and time of visits. This information is collected for statistical purposes only and will not be used to identify you.
-                  We may also utilise "cookies" which enable us to monitor website traffic patterns and to serve you more efficiently if you revisit the site. A "cookie" is a small software file that is placed on your computer and enables our website to recognise your computer upon a return visit. You can set your browser to notify you when you receive a cookie and this will provide you with an opportunity to either accept or reject it in each instance. Please be aware that disabling cookies may impede your use of the website to some extent.
+                  If you are satisfied with our proposed decision or actions, we will close your complaint and record the findings for our continuous improvement program. However, if you are not satisfied with our proposed decision or actions, we will record this, and provide you with information on how to escalate your complaint, to the Australian Travel Industry Association (ATIA), for external review under their Australian Travel Accreditation Scheme (ATAS).
                 </p>
 
                 <p className="mb-4">
-                  We take reasonable steps to maintain the security of the information we store in our systems or in physical records. We use a combination of security measures to prevent the unauthorised access of our systems and regularly review our security policies. Your personal information will be stored in secured locations both physically and electronically controlled by ourselves, and the offices of our service providers in line with the nature of your travel bookings. Payment details such as credit card details are generally never stored electronically or physically by our office and if this form of payment is your choice, TravLin Travel always recommend advising details over the phone for further enhanced security measure.
-                </p>
-
-                <p className="mb-4">
-                  We are committed to protecting your personal information and expressly agree not to disclose your personal information unless authorised by you. If you choose not to provide TravLin Travel with the personal information as requested we may not be able to provide you with the full range of our products and services. Your personal information will only be used for these purposes and will not be shared, sold or given to any third parties, unless required or authorised under the exemptions set out in the Privacy Act.
-                </p>
-
-                <p className="mb-4">
-                  You can request us to provide access to the personal information that we hold about you. You may request us to amend the details of the personal information we hold. We will amend the details on request provided we are satisfied that the amendment is valid. We may in some circumstances request you to provide documentary evidence or other corroboration of validity (e.g. provision of a marriage certificate or a registered deed poll to amend your name). If we do not consider it appropriate to make an amendment we will notify you within a reasonable time including written reasons for the refusal.
-                  To request access, request an amendment, request a qualifying statement or make a complaint please contact us using the details provided below.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Marketing</h3>
-                <p className="mb-4">
-                  Serving customers well is very important to us. As part of this service, we may use your personal information to identify a product or service that you may be interested in. We may with your consent where required by applicable law, use the contact details you have provided to contact you from time to time whether by phone, email, SMS or post to tell you about new or exciting products or services and special offers that we believe may be of interest to you, including information about our business partners' products and services.
-                </p>
-
-                <p className="mb-4">
-                  You can opt-out of receiving direct marketing communications from us, including communications from us on behalf of our business partners at any time by contacting us at any time, or by using the unsubscribe facility in the electronic communication you receive. By opting out of this kind of advertising you may still receive ads from TravLin Travel or ads from other parties that are broadly targeted by indirect means.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Privacy Complaints</h3>
-                <p className="mb-4">
-                  If you wish to complain about our handling of your personal information, please contact us with your concerns. We will investigate all complaints and respond to you as soon as practicable. We will need to verify your identity. If we find a complaint justified, we will resolve it. If necessary, we will change our policies and procedures to maintain our high standards of performance, service and customer care.
-                </p>
-
-                {/* Contact Information */}
-                <div className="bg-gray-50 p-4 rounded-lg border mt-8">
-                  <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Privacy Officer Contact
-                  </h3>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p><strong>TravLin Travel</strong></p>
-                    <p>PO Box 7303, Karingal Centre</p>
-                    <p>Karingal VICTORIA 3199</p>
-                    <p>Telephone +61 (415) 355 851</p>
-                    <p>Email hello@travlintravel.com.au</p>
-                  </div>
-                </div>
-
-                <p className="mb-4 mt-4 text-sm text-gray-600">
-                  TravLin Travel reserves the right to change is privacy policy at any time. It is advisable to review this privacy statement periodically for changes.
-                  For our full Complaints and Handling procedure, please refer to below – Complaints and Handling …
-                </p>
-
-                {/* Complaints Handling */}
-                <h2 className="text-xl font-bold text-gray-800 mt-8 mb-4">Complaints Handling Policy and Procedures</h2>
-                
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Objective of the Policy</h3>
-                <p className="mb-4">
-                  As a responsible travel agent, we seek to maintain and enhance our reputation of providing you with high quality products and services. We value complaints as they assist us to improve our products, services and customer service. We are committed to being responsive to the needs and concerns of our customers or potential customers and to resolving your complaint as quickly as possible.
-                </p>
-
-                <p className="mb-4">This policy has been designed to provide guidance to both our customers and staff on the manner in which we receive and manage your complaint. We are committed to being consistent, fair and impartial when managing your complaint. The objective of this policy is to ensure:</p>
-                <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                  <li>You are aware of our complaint lodgement and handling processes;</li>
-                  <li>Both you and our staff understand our complaints management process;</li>
-                  <li>Your complaint is investigated impartially with a balanced view of all evidence;</li>
-                  <li>We take reasonable steps to actively protect your personal information; and</li>
-                  <li>Your complaint is considered on its merits taking into account individual circumstances and needs.</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Definition of a Complaint</h3>
-                <p className="mb-4">
-                  In this policy a complaint means an expression of dissatisfaction by a customer relating to a travel service provided by us.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">How a complaint can be made</h3>
-                <p className="mb-4">
-                  If you are dissatisfied with a travel service provided by us, you should in the first instance consider speaking directly with the staff member/s you have been dealing with. If you are uncomfortable with this or consider the relevant staff member is unable to address your concerns you can lodge a complaint with us in one of the following ways:
-                </p>
-                <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                  <li>By completing the contact us section on our website - travlintravel.com.au;</li>
-                  <li>By telephoning us - +61 (415) 355 851;</li>
-                  <li>By writing to us - PO Box 7303, Karingal Centre, Karingal VIC 3199;</li>
-                  <li>By emailing us - hello@travlintravel.com.au; and</li>
-                  <li>In person (by appointment) speaking to any of our customer service staff.</li>
-                </ul>
-
-                <p className="mb-4">
-                  If we receive your complaint verbally and we consider it appropriate, we may ask you to put your complaint in writing. Our complaints management process is free of charge.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">The information you will need to tell us</h3>
-                <p className="mb-4">
-                  When we are investigating your complaint, we will be relying on information provided by you and information we may already be holding. We may need to contact you to clarify details or request additional information where necessary. To help us investigate your complaint quickly and efficiently we will ask you for the following information:
-                </p>
-                <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                  <li>Your name and contact details;</li>
-                  <li>The name of the person you have been dealing with about your travel service;</li>
-                  <li>The nature of the complaint;</li>
-                  <li>Details of any steps you have already taken to resolve the compliant;</li>
-                  <li>Details of conversations you may have had with us that are relevant to your complaint, and</li>
-                  <li>Copies of any documentation which supports your complaint.</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Help when making a complaint</h3>
-                <p className="mb-4">
-                  The person receiving or managing your complaint should provide you with any assistance you may need to make your complaint. However, if you consider you need further assistance please inform us of this at the time you are lodging your complaint.
-                </p>
-
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Recording complaints</h3>
-                <p className="mb-4">
-                  When taking a complaint, we will record your name and contact details. We will also record all details of your complaint including the facts and the cause/s of your complaint, the outcome and any actions taken following the investigation of your complaint. We will also record all dates and times relating to actions taken to resolve the complaint and communications between us. As part of our on-going improvement plan, complaints will be monitored for any identifying trends by management and rectification/remedial action taken to mitigate any identified issues.
-                </p>
-
-                <p className="mb-4">
-                  If you lodge a complaint, we will record your personal information solely for the purposes of addressing your complaint. Your personal details will actively be protected from disclosure, unless you expressly consent to its disclosure. Where a third-party travel supplier such as a tour operator, was involved in your travel services, we may be required to speak with them to fully investigate your complaint.
+                  ATAS is an industry accreditation scheme that sets the benchmark of quality for the travel industry. ATAS is also responsible for monitoring our compliance with the ATAS Code of Conduct (the Code) and assisting in the resolution of complaints. The Code sets the standards of good practice that ATAS participants must follow when dealing with their customers. As an ATAS participant we have agreed to be bound by the Code. If you would like to know more about the Code you can visit the ATAS website www.atas.com.au.
                 </p>
 
                 <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Feedback to customers</h3>
@@ -843,64 +323,182 @@ This customer has completed the legal acceptance process and can now proceed wit
                   Where possible, we will attempt to resolve your complaint at the first point of contact. If we are unable to resolve your complaint at the first point of contact, we will undertake an investigation of your complaint and provide you with our findings.
                 </p>
 
-                <p className="mb-4">
-                  If you are satisfied with our proposed decision or actions, we will close your complaint and record the findings for our continuous improvement program. However, if you are not satisfied with our proposed decision or actions, we will record this, and provide you with information on how to escalate your complaint, to the Australian Travel Industry Association (ATIA), for external review under their Australian Travel Accreditation Scheme (ATAS).
-                </p>
-
-                <p className="mb-4">
-                  ATAS is an industry accreditation scheme that sets the benchmark of quality for the travel industry. ATAS is also responsible for monitoring our compliance with the ATAS Code of Conduct (the Code) and assisting in the resolution of complaints. The Code sets the standards of good practice that ATAS participants must follow when dealing with their customers. As an ATAS participant we have agreed to be bound by the Code. If you would like to know more about the Code you can visit the ATAS website www.atas.com.au.
-                </p>
-
                 <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">ATIA Travel Accreditation Scheme (ATAS)</h3>
                 <p className="mb-4">Should you wish to speak to ATAS about your complaint you can contact them in the following ways:</p>
                 <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
                   <li>By completing the online complaint form on their website atas.com.au</li>
-                  <li>By telephoning them on 9287 9900</li>
-                  <li>By writing to them at Level 31, 31 Market Street, Sydney NSW 2000.</li>
-                  <li>By emailing them at compliance@afta.com.au</li>
+                  <li>By calling their 1800 number, 1800 682 827</li>
+                  <li>By emailing them at atas@atas.com.au</li>
+                  <li>By writing to them at GPO Box 1545, Brisbane Queensland 4001</li>
                 </ul>
 
-                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Your rights under Australian Consumer Law</h3>
-                <p className="mb-4">
-                  You reserve the right to refer your complaint to your relevant federal, state or territory consumer protection agency at any time.
+                <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-3">Contact Information</h3>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <Phone className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>(07) 3040 0000</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Mail className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>info@travlintravel.com.au</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Building2 className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>TravLin Travel, Brisbane, Queensland</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'customer-acceptance' && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Customer Acceptance Form</h2>
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p className="text-blue-800">
+                  Please complete this form to acknowledge your acceptance of our terms and conditions, and to provide us with the information we need to serve you better.
                 </p>
               </div>
-            </div>
-          </CardContent>
-          
-          <div className="p-3 md:p-4 border-t bg-orange-50 border-orange-200">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <CheckCircle className="w-4 h-4 text-orange-600" />
-                <h3 className="font-semibold text-orange-800 text-sm md:text-base">Ready to Proceed with Your Booking?</h3>
-              </div>
-              <p className="text-xs md:text-sm text-orange-700 mb-3 max-w-2xl mx-auto">
-                Complete our customer acceptance form to acknowledge that you've read and agree to our terms, conditions, and service fees. This enables us to proceed with your travel arrangements.
-              </p>
-              <div className="flex gap-2 justify-center">
-                <Button 
-                  onClick={() => setShowAcceptanceForm(true)}
-                  style={{ backgroundColor: 'var(--brand-orange)' }}
-                  className="text-white hover:opacity-90 text-xs md:text-sm"
-                  size="sm"
-                >
-                  <CheckCircle className="w-3 h-3 mr-1" />
-                  Complete Customer Acceptance
-                </Button>
-                <Button onClick={handleClose} variant="outline" size="sm" className="text-xs md:text-sm">
-                  Close
-                </Button>
-              </div>
-              <p className="text-xs text-gray-500 mt-3 border-t border-orange-200 pt-2">
-                TravLin Travel reserves the right to change its privacy policy at any time. It is advisable to review this privacy statement periodically for changes.
-              </p>
-            </div>
-          </div>
-        </Card>
-      </div>
-    )
-  }
 
-  // Render modal content using Portal to escape footer's stacking context
-  return createPortal(modalContent(), document.body)
-}
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <User className="w-4 h-4 inline mr-1" />
+                      First Name *
+                    </label>
+                    <Input
+                      value={form.firstName}
+                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      placeholder="Enter your first name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <User className="w-4 h-4 inline mr-1" />
+                      Last Name *
+                    </label>
+                    <Input
+                      value={form.lastName}
+                      onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      placeholder="Enter your last name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <Mail className="w-4 h-4 inline mr-1" />
+                    Email Address *
+                  </label>
+                  <Input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <Phone className="w-4 h-4 inline mr-1" />
+                    Phone Number *
+                  </label>
+                  <Input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    placeholder="Enter your phone number"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <Building2 className="w-4 h-4 inline mr-1" />
+                    Address
+                  </label>
+                  <Textarea
+                    value={form.address}
+                    onChange={(e) => handleInputChange('address', e.target.value)}
+                    placeholder="Enter your address"
+                    rows={3}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <Calendar className="w-4 h-4 inline mr-1" />
+                    Preferred Travel Date
+                  </label>
+                  <Input
+                    type="date"
+                    value={form.travelDate}
+                    onChange={(e) => handleInputChange('travelDate', e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Electronic Signature *
+                  </label>
+                  <Input
+                    value={form.signature}
+                    onChange={(e) => handleInputChange('signature', e.target.value)}
+                    placeholder="Type your full name as electronic signature"
+                    required
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    By typing your name above, you agree this constitutes a legal signature.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="accept-terms"
+                      checked={form.acceptTerms}
+                      onCheckedChange={(checked) => handleInputChange('acceptTerms', !!checked)}
+                    />
+                    <label htmlFor="accept-terms" className="text-sm text-gray-700 cursor-pointer">
+                      I acknowledge that I have read and accept the Terms & Conditions, Privacy Policy, and Complaint Process outlined by TravLin Travel. *
+                    </label>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="accept-marketing"
+                      checked={form.acceptMarketing}
+                      onCheckedChange={(checked) => handleInputChange('acceptMarketing', !!checked)}
+                    />
+                    <label htmlFor="accept-marketing" className="text-sm text-gray-700 cursor-pointer">
+                      I would like to receive marketing communications and travel updates from TravLin Travel.
+                    </label>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button
+                    onClick={handleSubmitCustomerAcceptance}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    size="lg"
+                  >
+                    Submit Customer Acceptance Form
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TermsPrivacy;
