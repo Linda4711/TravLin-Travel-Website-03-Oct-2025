@@ -532,6 +532,25 @@
   }
 }
 
+/* Article Hero Mobile Optimization - Proper Height for Mobile Reading */
+@media (max-width: 768px) {
+  .article-hero-mobile-optimized {
+    height: 50vh !important;
+    min-height: 50vh !important;
+    background-attachment: scroll !important;
+    background-position: center 35% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-hero-mobile-optimized {
+    height: 45vh !important;
+    min-height: 45vh !important;
+    background-attachment: scroll !important;
+    background-position: center 30% !important;
+  }
+}
+
 /* High Resolution Image Optimization */
 .hero-bg-responsive {
   image-rendering: -webkit-optimize-contrast;
@@ -554,6 +573,8 @@
   transform: translate3d(0,0,0) !important;
   -webkit-transform: translate3d(0,0,0) !important;
 }
+
+
 
 /* Mobile optimizations */
 @media (max-width: 640px) {
