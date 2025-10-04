@@ -28,10 +28,6 @@ export default function Footer({ onContactClick, onNavigateToServices, onNavigat
   const [isFooterSubscribing, setIsFooterSubscribing] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
 
-
-
-
-
   // Mock subscription handler
   const handleFooterSubscribe = async () => {
     console.log('🔄 Footer subscription attempt started')
@@ -109,7 +105,8 @@ Please add this email to the newsletter mailing list for travel updates and spec
 
   return (
     <footer className="bg-gray-800 text-white">
-      <div className="travel-container py-4">
+      {/* CONSTRAINED FOOTER WIDTH - MATCHES HEADER IMAGE ALIGNMENT */}
+      <div className="max-w-6xl mx-auto px-8 py-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           
           {/* Column 1: About Us */}
@@ -377,7 +374,7 @@ Please add this email to the newsletter mailing list for travel updates and spec
         </div>
       </div>
 
-      {/* Terms & Privacy Modal */}
+      {/* Terms & Privacy Modal - WITH MISSING PROPS FIXED */}
       <TermsPrivacy 
         isOpen={showTermsPrivacy} 
         onClose={() => setShowTermsPrivacy(false)}
