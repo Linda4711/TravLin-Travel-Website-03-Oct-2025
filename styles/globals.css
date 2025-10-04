@@ -524,6 +524,14 @@
 
 /* Enhanced responsive design */
 
+/* Contact Hero Mobile Optimization */
+@media (max-width: 768px) {
+  .hero-bg-responsive {
+    background-attachment: scroll !important;
+    background-position: center 30% !important;
+  }
+}
+
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .travel-section {
