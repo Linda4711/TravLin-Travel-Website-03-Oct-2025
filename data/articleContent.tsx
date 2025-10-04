@@ -36,6 +36,9 @@ import React from 'react'
 // Article Content Components - Organized by ID for easy management
 export const getArticleContent = (articleId: number) => {
   switch (articleId) {
+    case 11: // CRUISE MONTH OCTOBER
+      return <CruiseMonthOctoberContent />
+    
     case 1: // VALUE OF A TRAVEL AGENT
       return <ValueOfTravelAgentContent />
     
@@ -70,6 +73,251 @@ export const getArticleContent = (articleId: number) => {
       return <DefaultArticleContent />
   }
 }
+
+// CRUISE MONTH OCTOBER Article Content
+const CruiseMonthOctoberContent = () => (
+  <div className="max-w-4xl mx-auto">
+    {/* Article Header Section */}
+    <div className="mb-8">
+      <div className="flex justify-center mb-6">
+        <div className="w-32 h-1 rounded-full" 
+             style={{
+               background: 'linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-orange) 50%, var(--brand-yellow) 100%)'
+             }}>
+        </div>
+      </div>
+      <h1 className="section-heading text-center mb-3">It's Cruise Month October!</h1>
+      <p className="text-center text-gray-600 text-lg mb-3 italic">
+        When the cruise community comes alive with excitement, inspiration, and unbeatable travel opportunities
+      </p>
+    </div>
+
+    {/* Magazine-Style Lead Paragraph */}
+    <div className="article-content-styling">
+      {/* Enhanced Quote Section with Cruise Graphics */}
+      <div className="relative my-6 mx-auto max-w-4xl">
+        {/* Main Quote Container */}
+        <div className="relative bg-white rounded-lg shadow-xl border-l-6 overflow-hidden" style={{ borderLeftColor: 'var(--brand-blue)' }}>
+          {/* Subtle Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-4 right-6 w-12 h-12 watercolor-blob floating-element opacity-[0.08]"></div>
+            <div className="absolute bottom-6 left-4 w-8 h-8 watercolor-blob-coral floating-element opacity-[0.06]" style={{ animationDelay: '2s' }}></div>
+            <div className="absolute top-12 left-12 w-6 h-6 rounded-full floating-element opacity-[0.04]" style={{ background: 'var(--brand-yellow)', animationDelay: '4s' }}></div>
+          </div>
+          
+          {/* Quote Content */}
+          <div className="relative z-10 p-5">
+            <div className="flex items-start">
+              {/* Large Opening Quote Mark */}
+              <div className="flex-shrink-0 mr-4 mt-1">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--brand-blue)' }}>
+                  <span className="text-white text-xl" style={{ fontFamily: 'Georgia, serif' }}>&quot;</span>
+                </div>
+              </div>
+              
+              {/* Quote Text */}
+              <div className="flex-1">
+                <p className="text-lg leading-relaxed font-medium text-gray-800 italic mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                  October is Cruise Month—a time when the entire cruise community comes alive with excitement, new ideas, and unbeatable travel inspiration. Maybe the time to set sail, October is also when cruise lines unveil the best of the best for the coming season, spotlighting ships, destinations, and exclusive experiences just waiting to be discovered.
+                </p>
+                
+                {/* Closing Quote Mark */}
+                <div className="flex justify-end">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--brand-orange)' }}>
+                    <span className="text-white text-sm" style={{ fontFamily: 'Georgia, serif' }}>&quot;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Brand Accent Line */}
+            <div className="mt-3 pt-3 border-t border-gray-200">
+              <div className="w-20 h-1 rounded-full mx-auto" 
+                   style={{
+                     background: 'linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-orange) 100%)'
+                   }}>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Professional Article Body */}
+      <div className="prose prose-base max-w-none">
+        
+        {/* Section 1: The Buzz from Cruise 360 */}
+        <div className="mb-6">
+          <h3 className="text-xl text-gray-800 mb-4 pb-2 border-b-2" style={{ borderBottomColor: 'var(--brand-blue)' }}>
+            The Buzz from Cruise 360
+          </h3>
+          
+          <div className="space-y-4">
+            <p className="text-description leading-relaxed">
+              This year's Cruise Month excitement was supercharged by the biggest cruise conference ever held in the region: Cruise360, which took place in late August and was proudly attended by TravLin Travel, as it does every year. This year marked the 10th anniversary of Cruise360, bringing together more than 850 delegates and passionate cruise travel professionals—one of the largest gatherings ever for those who live and breathe cruising.
+            </p>
+            
+            <p className="text-description leading-relaxed">
+              At Cruise360, leaders shared forward-thinking ideas on trends shaping the future of travel. Hot topics included:
+            </p>
+            
+            <div className="p-4 rounded border-t-4" style={{ backgroundColor: 'rgba(0, 117, 204, 0.08)', borderTopColor: '#0075CC' }}>
+              <h4 className="mb-3" style={{ color: '#0075CC' }}>Key Cruise360 Highlights</h4>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#0075CC' }}></span>
+                  The arrival of new, innovative ships making their debut locally
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#0075CC' }}></span>
+                  The growth of river and expedition cruises offering deeper, more immersive journeys
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#0075CC' }}></span>
+                  The rise of multi-generational travel and growing interest from both repeat and first-time cruisers
+                </li>
+              </ul>
+            </div>
+            
+            <p className="text-description leading-relaxed">
+              Discussions also highlighted how wanderlust is only growing stronger, with more guests looking to explore close to home and to take advantage of ever-more convenient fly-cruise options to other continents.
+            </p>
+            
+            <p className="text-description leading-relaxed">
+              TravLin Travel's annual attendance reflects a commitment to staying ahead of the curve, connecting directly with cruise leaders, and bringing the latest trends, offers, and insider tips back to travelers every year.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 2: What Makes Cruise Month So Special */}
+        <div className="mb-6">
+          <h3 className="text-xl text-gray-800 mb-4 pb-2 border-b-2" style={{ borderBottomColor: 'var(--brand-blue)' }}>
+            What Makes Cruise Month So Special?
+          </h3>
+          
+          <div className="space-y-4">
+            <p className="text-description leading-relaxed">
+              During Cruise Month, cruise lines pull out all the stops. Expect exclusive deals, exciting showcases, new itineraries, and a wave of fresh travel inspiration. For cruise travelers, this is the season to engage—whether seeking the luxury of new ships, the comfort of old favorites, or dreaming about adventures on the high seas or winding rivers.
+            </p>
+            
+
+          </div>
+        </div>
+
+        {/* Section 3: Why Book a Cruise */}
+        <div className="mb-6">
+          <h3 className="text-xl text-gray-800 mb-4 pb-2 border-b-2" style={{ borderBottomColor: 'var(--brand-blue)' }}>
+            Why Book a Cruise? The Complete Travel Experience
+          </h3>
+          
+          <div className="space-y-4">
+            <p className="text-description leading-relaxed">
+              A cruise holiday gives the ultimate blend of relaxation, discovery, and value. Unpack once and wake up to an ever-changing view—exploring tropical paradises, historic cities, and remote coasts, all while enjoying world-class amenities on board.
+            </p>
+            
+            <p className="text-description leading-relaxed">
+              What makes cruising irresistible:
+            </p>
+            
+            <div className="p-4 rounded border-t-4" style={{ backgroundColor: 'rgba(237, 125, 49, 0.08)', borderTopColor: '#ED7D31' }}>
+              <h4 className="mb-3" style={{ color: '#ED7D31' }}>Cruising Advantages</h4>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#ED7D31' }}></span>
+                  Effortless travel: See multiple destinations with just one booking
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#ED7D31' }}></span>
+                  All-in-one value: Accommodation, dining, entertainment, and activities included
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#ED7D31' }}></span>
+                  Exciting excursions: Authentic local experiences at every port
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#ED7D31' }}></span>
+                  Onboard luxury: Pools, spas, live shows, and gourmet cuisine
+                </li>
+              </ul>
+            </div>
+            
+            <p className="text-description leading-relaxed">
+              River and expedition cruising now offer more intimate and adventurous options for those wanting even deeper journeys into nature, culture, and history.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 4: The Season Ahead */}
+        <div className="mb-6">
+          <h3 className="text-xl text-gray-800 mb-4 pb-2 border-b-2" style={{ borderBottomColor: 'var(--brand-blue)' }}>
+            The Season Ahead: A Taste of Adventure
+          </h3>
+          
+          <div className="space-y-4">
+            <p className="text-description leading-relaxed">
+              This upcoming summer, a record 63 cruise ships will visit Australasian waters between October and April—bringing hundreds of thousands of travelers to coastal cities and breathtaking islands. With new ships making maiden appearances, plus the familiar favorites and locally-based operators, cruisers will have their pick of extraordinary travel experiences.
+            </p>
+            
+            <p className="text-description leading-relaxed">
+              The value of cruising continues to outshine other travel styles, with inclusions and experiences delivering unbeatable bang for your buck. Whether seeking luxury, discovery, or family fun, cruising has never been more accessible or enticing.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 5: Get Ready to LoveCruise */}
+        <div className="mb-6">
+          <h3 className="text-xl text-gray-800 mb-4 pb-2 border-b-2" style={{ borderBottomColor: 'var(--brand-blue)' }}>
+            Get Ready to #LoveCruise This Cruise Month
+          </h3>
+          
+          <div className="space-y-4">
+            <p className="text-description leading-relaxed">
+              October's Cruise Month is your passport to cruise discovery—perfect for planning this season's highlights or dreaming big for adventures yet to come. TravLin Travel brings back the latest insights from Cruise360, ensuring you're connected to every trend, opportunity, and inspired itinerary.
+            </p>
+            
+            <p className="text-description leading-relaxed">
+              Follow along for special deals, new resources, and a community of cruise lovers as passionate about travel as you are. The sea is calling, and the season of discovery is just beginning. #LoveCruise—the adventure starts now! Why not make the first step and search for your perfect cruise using the blue 'Search Cruises' tool/button on our 'Cruises' page right here on our website! We look forward to hearing from you!
+            </p>
+          </div>
+        </div>
+
+        {/* Footer Section */}
+        <div className="mt-8 mb-4">
+          <div className="flex justify-center mb-6">
+            <div className="w-32 h-1 rounded-full" 
+                 style={{
+                   background: 'linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-orange) 50%, var(--brand-yellow) 100%)'
+                 }}>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-blue-50 to-orange-50 p-6 rounded border border-gray-200 text-center">
+            <p className="text-xl leading-relaxed text-gray-700 mb-6" style={{ fontFamily: 'Times, "Times New Roman", serif', fontStyle: 'italic' }}>
+              Ready to explore the world's most exciting cruise opportunities? TravLin Travel is here to help you discover the perfect cruise experience. Follow us for insider insights and exclusive cruise month updates.
+            </p>
+            
+            <div className="flex justify-center items-center gap-4">
+              <a href="https://facebook.com/travlintravel" className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-110" aria-label="Follow on Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://instagram.com/travlintravel" className="inline-flex items-center justify-center w-12 h-12 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-all duration-300 hover:scale-110" aria-label="Follow on Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.4-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="https://youtube.com/travlintravel" className="inline-flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all duration-300 hover:scale-110" aria-label="Subscribe on YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
 // VALUE OF A TRAVEL AGENT Article Content
 const ValueOfTravelAgentContent = () => (
