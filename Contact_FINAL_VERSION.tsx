@@ -346,8 +346,8 @@ export default function ContactPage({ onNavigateBack, onNavigateToServices, onNa
         </div>
       </section>
 
-      {/* Screen 2 Testimonials: CCA 26 testimonial with Review Buttons - ONLY on Contact Page */}
-      <Testimonials hideHeader={true} showReviewButtons={true} specificTestimonialId={11} />
+      {/* Testimonials: Auto-scrolling with Review Buttons - ONLY on Contact Page */}
+      <Testimonials hideHeader={true} showReviewButtons={true} />
 
       
       <Footer 
