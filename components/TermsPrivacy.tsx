@@ -44,9 +44,9 @@ export default function TermsPrivacy({ isOpen, onClose }: TermsPrivacyProps) {
   const CONTACT_EMAIL = 'hello@travlintravel.com.au'
 
   const pdfLinks = {
-    serviceFees: '/documents/TravLin-Travel_Schedule-of-FeesATIA-Fee-Flyer_JUL-25.pdf',
-    travelInfo: '/documents/TravLin-Travel_Travel-Information-ONLY_JUL25.pdf',
-    customerAcceptance: '/documents/TravLin-Travel_Customer-Acceptance-ONLY_JUL25.pdf'
+    serviceFees: '/TravLin Travel_Schedule of Fees+ATIA Fee Flyer_JUL25.pdf',
+    travelInfo: '/TravLin Travel_Travel Information ONLY_JUL25.pdf',
+    customerAcceptance: '/TravLin Travel_Customer Acceptance ONLY_JUL25.pdf'
   }
 
   if (!isOpen) return null
