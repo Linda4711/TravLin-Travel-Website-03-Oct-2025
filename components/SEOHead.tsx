@@ -168,8 +168,7 @@ export default function SEOHead({
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
       { property: 'og:image:type', content: 'image/jpeg' },
-      { property: 'og:locale', content: 'en_AU' },
-      { property: 'fb:app_id', content: 'your-facebook-app-id' } // Optional - replace with your actual FB app ID
+      { property: 'og:locale', content: 'en_AU' }
     ]
 
     ogTags.forEach(tag => {
