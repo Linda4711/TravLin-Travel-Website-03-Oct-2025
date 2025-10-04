@@ -23,13 +23,10 @@ interface FooterProps {
 
 export default function Footer({ onContactClick, onNavigateToServices, onNavigateToCruises, onNavigateToTravelOptions, onNavigateToStories, onNavigateToAbout, onNavigateToAI, onNavigateToHome, onNavigateToContact }: FooterProps) {
   const [showTermsPrivacy, setShowTermsPrivacy] = useState(false)
+  const [activeTab, setActiveTab] = useState<'terms' | 'privacy' | 'complaint' | 'customer-acceptance'>('terms')
   const [footerEmail, setFooterEmail] = useState('')
   const [isFooterSubscribing, setIsFooterSubscribing] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
-
-
-
-
 
   // Mock subscription handler
   const handleFooterSubscribe = async () => {
@@ -108,7 +105,8 @@ Please add this email to the newsletter mailing list for travel updates and spec
 
   return (
     <footer className="bg-gray-800 text-white">
-      <div className="travel-container py-4">
+      {/* FOOTER WIDTH - MATCHES HEADER CONTENT ALIGNMENT */}
+      <div className="content-container py-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           
           {/* Column 1: About Us */}
@@ -376,10 +374,12 @@ Please add this email to the newsletter mailing list for travel updates and spec
         </div>
       </div>
 
-      {/* Terms & Privacy Modal */}
+      {/* Terms & Privacy Modal - WITH MISSING PROPS FIXED */}
       <TermsPrivacy 
         isOpen={showTermsPrivacy} 
-        onClose={() => setShowTermsPrivacy(false)} 
+        onClose={() => setShowTermsPrivacy(false)}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
       />
     </footer>
   )
