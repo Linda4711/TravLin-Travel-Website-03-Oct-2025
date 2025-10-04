@@ -128,7 +128,7 @@ export default function Header({ onNavigateToServices, onNavigateToCruises, onNa
       return
     }
     
-    if (href === '/stories') {
+    if (href === '/TravLin-Stories') {
       if (onNavigateToStories) {
         onNavigateToStories()
       }
@@ -193,7 +193,7 @@ export default function Header({ onNavigateToServices, onNavigateToCruises, onNa
             })
           }
         }, 100)
-      } else if (page === '/stories' && onNavigateToStories) {
+      } else if (page === '/TravLin-Stories' && onNavigateToStories) {
         onNavigateToStories()
         setTimeout(() => {
           const element = document.querySelector(`#${anchor}`)
@@ -262,7 +262,7 @@ export default function Header({ onNavigateToServices, onNavigateToCruises, onNa
     },
     { 
       name: 'TravLin Stories', 
-      href: '/stories'
+      href: '/TravLin-Stories'
     },
     { 
       name: 'Contact Us', 
