@@ -84,8 +84,8 @@ export default function AboutUsPage({ onNavigateBack, onNavigateToContact, onNav
         style={{
           background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100% 100%), url("${aboutHeroImage}")`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundPosition: window.innerWidth <= 768 ? 'center top' : 'center',
+          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed'
         }}
       >
         {/* Content */}
