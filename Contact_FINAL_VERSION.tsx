@@ -136,9 +136,10 @@ export default function ContactPage({ onNavigateBack, onNavigateToServices, onNa
         className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-24"
         style={{
           background: `linear-gradient(135deg, rgba(0, 117, 204, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.4) 100% 100%), url(${contactHeroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundSize: window.innerWidth <= 768 ? 'cover' : 'cover',
+          backgroundPosition: window.innerWidth <= 768 ? 'center 25%' : 'center',
+          backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         {/* Content */}
