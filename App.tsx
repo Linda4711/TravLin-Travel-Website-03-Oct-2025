@@ -199,8 +199,8 @@ function AppContent() {
           </div>
         </section>
 
-        {/* 7. TESTIMONIALS SECTION - Screen 1: John M. testimonial */}
-        <Testimonials specificTestimonialId={7} />
+        {/* 7. TESTIMONIALS SECTION - Auto-scrolling through all testimonials */}
+        <Testimonials />
         
       </main>
       
