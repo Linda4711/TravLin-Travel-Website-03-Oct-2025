@@ -3,6 +3,15 @@ import { X, FileText, Download, CheckCircle } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Configuration - REPLACE WITH YOUR ACTUAL CREDENTIALS
+const EMAILJS_CONFIG = {
+  SERVICE_ID: 'YOUR_SERVICE_ID',          // Replace with your actual Service ID
+  TEMPLATE_ID: 'YOUR_TEMPLATE_ID',        // Replace with your actual Template ID  
+  PUBLIC_KEY: 'YOUR_PUBLIC_KEY',          // Replace with your actual Public Key
+  ENABLED: false                          // Set to true after adding your credentials
+};
 
 interface TermsPrivacyProps {
   isOpen: boolean;
@@ -45,7 +54,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
     setShowCustomerAcceptance(false);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     // Validate required fields
     if (!form.firstName.trim()) {
       toast.error('Please enter your first name');
@@ -62,6 +71,45 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
     if (!form.acceptTravelInfo || !form.acceptServiceFees || !form.acceptCustomerForm) {
       toast.error('Please accept all terms and conditions to proceed');
       return;
+    }
+
+    // Send email notification via EmailJS if enabled
+    if (EMAILJS_CONFIG.ENABLED) {
+      try {
+        const acceptanceId = `TLT-${Date.now()}`;
+        const timestamp = new Date().toLocaleString('en-AU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        });
+
+        const templateParams = {
+          customer_name: `${form.firstName} ${form.lastName}`,
+          customer_email: form.email,
+          customer_phone: form.phone || 'Not provided',
+          business_name: form.businessName || 'N/A',
+          acceptance_id: acceptanceId,
+          timestamp: timestamp,
+          documents_accepted: 'Service Fees, Travel Information, Customer Acceptance',
+          user_agent: navigator.userAgent
+        };
+
+        await emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID,
+          templateParams,
+          EMAILJS_CONFIG.PUBLIC_KEY
+        );
+
+        console.log('✅ Customer Acceptance email sent successfully');
+      } catch (error) {
+        console.error('❌ EmailJS Error:', error);
+        // Don't fail the submission if email fails
+      }
     }
 
     // Success
@@ -143,7 +191,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
                   placeholder="Enter your first name"
                   value={form.firstName}
                   onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  className="w-full text-sm h-8"
+                  className="w-full text-sm h-8 text-gray-900"
                 />
               </div>
               <div>
@@ -155,7 +203,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
                   placeholder="Enter your last name"
                   value={form.lastName}
                   onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  className="w-full text-sm h-8"
+                  className="w-full text-sm h-8 text-gray-900"
                 />
               </div>
             </div>
@@ -169,7 +217,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
                 placeholder="Enter your email address"
                 value={form.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className="w-full text-sm h-8"
+                className="w-full text-sm h-8 text-gray-900"
               />
             </div>
 
@@ -183,7 +231,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
                   placeholder="+61 xxx xxx xxx"
                   value={form.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  className="w-full text-sm h-8"
+                  className="w-full text-sm h-8 text-gray-900"
                 />
               </div>
               <div>
@@ -195,7 +243,7 @@ const TermsPrivacy: React.FC<TermsPrivacyProps> = ({ isOpen, onClose, activeTab,
                   placeholder="Company/Organization name"
                   value={form.businessName}
                   onChange={(e) => handleInputChange('businessName', e.target.value)}
-                  className="w-full text-sm h-8"
+                  className="w-full text-sm h-8 text-gray-900"
                 />
               </div>
             </div>
