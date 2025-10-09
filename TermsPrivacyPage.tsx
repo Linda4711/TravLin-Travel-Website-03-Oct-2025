@@ -162,55 +162,55 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
         onNavigateToStories={onNavigateToStories}
       />
 
-      {/* Main Content - EXACT COPY OF MODAL CONTENT */}
-      <main className="content-container py-8" style={{ paddingTop: '120px' }}>
+      {/* Main Content - OPTIMIZED FOR SINGLE SCREEN VIEW */}
+      <main className="content-container py-4" style={{ paddingTop: '80px' }}>
         <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-2xl">
           
-          {/* Header Section */}
-          <div className="bg-white border-b-2 border-blue-200 px-6 py-4 flex items-center shadow-sm">
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-md">
-              <FileText className="w-6 h-6 text-white" />
+          {/* Header Section - COMPACT */}
+          <div className="bg-white border-b-2 border-blue-200 px-4 py-2 flex items-center shadow-sm">
+            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center shadow-md">
+              <FileText className="w-5 h-5 text-white" />
             </div>
-            <div className="ml-4">
-              <h1 className="text-xl font-bold text-gray-800">Terms & Privacy</h1>
-              <p className="text-sm text-gray-600">Effective 01 Jul 2025</p>
+            <div className="ml-3">
+              <h1 className="text-lg font-bold text-gray-800">Terms & Privacy</h1>
+              <p className="text-xs text-gray-600">Effective 01 Jul 2025</p>
             </div>
           </div>
 
-          {/* Scrollable Content */}
-          <div className="px-6 py-6 max-h-[70vh] overflow-y-auto">
-            {/* Document Downloads */}
-            <div className="mb-6 p-4 bg-blue-100 border-l-4 border-blue-600 rounded-r-lg shadow-sm">
-              <h3 className="text-sm font-semibold text-blue-800 mb-3 flex items-center">
-                <Download className="w-5 h-5 mr-2" />
+          {/* Scrollable Content - REDUCED HEIGHT TO FIT BUTTON ON SCREEN */}
+          <div className="px-4 py-3 max-h-[50vh] overflow-y-auto">
+            {/* Document Downloads - COMPACT */}
+            <div className="mb-3 p-3 bg-blue-100 border-l-4 border-blue-600 rounded-r-lg shadow-sm">
+              <h3 className="text-xs font-semibold text-blue-800 mb-2 flex items-center">
+                <Download className="w-4 h-4 mr-1.5" />
                 Document Downloads
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <a
                   href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
+                  className="flex items-center justify-center p-2 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <FileText className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
                   <span className="text-center">Schedule of Professional Service Fees</span>
                 </a>
                 <a
                   href="/TravLin-Travel-Travel-Information-ONLY-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
+                  className="flex items-center justify-center p-2 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <FileText className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
                   <span className="text-center">Travel Information & Terms</span>
                 </a>
                 <a
                   href="/TravLin-Travel-Customer-Acceptance-ONLY-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
+                  className="flex items-center justify-center p-2 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <FileText className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
                   <span className="text-center">Customer Acceptance Form</span>
                 </a>
               </div>
@@ -641,14 +641,14 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
             </div>
           </div>
 
-          {/* Footer - Ready to Proceed */}
-          <div className="bg-blue-50 border-t-2 border-blue-200 px-6 py-5 shadow-lg">
+          {/* Footer - Ready to Proceed - COMPACT */}
+          <div className="bg-blue-50 border-t-2 border-blue-200 px-4 py-3 shadow-lg">
             <div className="text-center">
-              <div className="flex items-center justify-center mb-3">
-                <CheckCircle className="w-6 h-6 text-gray-800 mr-2" />
-                <h3 className="text-base font-bold text-gray-900">Ready to Proceed with Your Booking?</h3>
+              <div className="flex items-center justify-center mb-2">
+                <CheckCircle className="w-5 h-5 text-gray-800 mr-2" />
+                <h3 className="text-sm font-bold text-gray-900">Ready to Proceed with Your Booking?</h3>
               </div>
-              <p className="text-gray-800 mb-4 text-sm">
+              <p className="text-gray-800 mb-3 text-xs">
                 Complete our customer acceptance form to acknowledge that you've read, understood and accept our terms, conditions, and service fees.
               </p>
               <div className="flex justify-center space-x-4">
