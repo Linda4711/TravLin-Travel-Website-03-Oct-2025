@@ -5,12 +5,12 @@ import { Button } from './ui/button';
 import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
 
-// EmailJS Configuration - REPLACE WITH YOUR ACTUAL CREDENTIALS
+// EmailJS Configuration - LIVE CREDENTIALS
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'YOUR_SERVICE_ID',          // Replace with your actual Service ID
-  TEMPLATE_ID: 'YOUR_TEMPLATE_ID',        // Replace with your actual Template ID  
-  PUBLIC_KEY: 'YOUR_PUBLIC_KEY',          // Replace with your actual Public Key
-  ENABLED: false                          // Set to true after adding your credentials
+  SERVICE_ID: 'service_rlnjyuj',
+  TEMPLATE_ID: 'template_270l5y4',
+  PUBLIC_KEY: 'GY6ImN3fkI91A6mGw',
+  ENABLED: true
 };
 
 interface TermsPrivacyProps {
