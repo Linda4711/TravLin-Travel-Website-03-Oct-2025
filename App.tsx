@@ -380,7 +380,7 @@ function AppContent() {
         <Route path="/terms-and-privacy" element={
           <div>
             <SEOHead 
-              title="Terms & Privacy - TravLin Travel | Legal Information & Policies"
+              title="Terms, Privacy, Acceptance - TravLin Travel | Legal Information & Policies"
               description="Read TravLin Travel's Terms & Conditions, Privacy Policy, and Customer Acceptance Form. Professional travel agency policies, legal information, and service fees."
               page="contact"
             />
