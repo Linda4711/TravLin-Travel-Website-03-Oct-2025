@@ -12,6 +12,7 @@ import CruisesPage from './Cruises_FINAL_VERSION.tsx';
 import TravelOptionsPage from './TravelOptions_FINAL_VERSION.tsx';
 import ContactPage from './Contact_FINAL_VERSION.tsx';
 import TravLinStoriesPage from './TravLinStories_FINAL_VERSION_M.tsx';
+import TermsPrivacyPage from './TermsPrivacyPage.tsx';
 
 // Import home page components
 import Header from './components/Header';
@@ -366,6 +367,24 @@ function AppContent() {
             <SEOHead page="stories" />
             <TravLinStoriesPage
               onNavigateBack={navigateToStories}
+              onNavigateToHome={navigateToHome}
+              onNavigateToAbout={navigateToAbout}
+              onNavigateToCruises={navigateToCruises}
+              onNavigateToTravelOptions={navigateToTravelOptions}
+              onNavigateToContact={handleFooterContactClick}
+              onNavigateToStories={navigateToStories}
+            />
+          </div>
+        } />
+        {/* Terms & Privacy dedicated page */}
+        <Route path="/terms-and-privacy" element={
+          <div>
+            <SEOHead 
+              title="Terms & Privacy - TravLin Travel | Legal Information & Policies"
+              description="Read TravLin Travel's Terms & Conditions, Privacy Policy, and Customer Acceptance Form. Professional travel agency policies, legal information, and service fees."
+              page="contact"
+            />
+            <TermsPrivacyPage
               onNavigateToHome={navigateToHome}
               onNavigateToAbout={navigateToAbout}
               onNavigateToCruises={navigateToCruises}
