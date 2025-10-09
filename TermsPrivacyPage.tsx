@@ -162,23 +162,23 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
         onNavigateToStories={onNavigateToStories}
       />
 
-      {/* Main Content - OPTIMIZED FOR SINGLE SCREEN VIEW */}
-      <main className="content-container py-4" style={{ paddingTop: '80px' }}>
+      {/* Main Content - OPTIMIZED FOR SINGLE SCREEN VIEW - DESKTOP & MOBILE */}
+      <main className="content-container py-2 md:py-4" style={{ paddingTop: '70px' }}>
         <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-2xl">
           
-          {/* Header Section - COMPACT */}
-          <div className="bg-white border-b-2 border-blue-200 px-4 py-2 flex items-center shadow-sm">
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center shadow-md">
-              <FileText className="w-5 h-5 text-white" />
+          {/* Header Section - COMPACT - MOBILE OPTIMIZED */}
+          <div className="bg-white border-b-2 border-blue-200 px-3 md:px-4 py-1.5 md:py-2 flex items-center shadow-sm">
+            <div className="w-7 h-7 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center shadow-md">
+              <FileText className="w-4 h-4 md:w-5 md:h-5 text-white" />
             </div>
-            <div className="ml-3">
-              <h1 className="text-lg font-bold text-gray-800">Terms & Privacy</h1>
+            <div className="ml-2 md:ml-3">
+              <h1 className="text-base md:text-lg font-bold text-gray-800">Terms & Privacy</h1>
               <p className="text-xs text-gray-600">Effective 01 Jul 2025</p>
             </div>
           </div>
 
-          {/* Scrollable Content - REDUCED HEIGHT TO FIT BUTTON ON SCREEN */}
-          <div className="px-4 py-3 max-h-[50vh] overflow-y-auto">
+          {/* Scrollable Content - REDUCED HEIGHT TO FIT BUTTON ON SCREEN - MOBILE OPTIMIZED */}
+          <div className="px-3 md:px-4 py-2 md:py-3 max-h-[45vh] md:max-h-[50vh] overflow-y-auto">
             {/* Document Downloads - COMPACT */}
             <div className="mb-3 p-3 bg-blue-100 border-l-4 border-blue-600 rounded-r-lg shadow-sm">
               <h3 className="text-xs font-semibold text-blue-800 mb-2 flex items-center">
@@ -216,13 +216,13 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
               </div>
             </div>
 
-            {/* Terms & Conditions Content */}
-            <div className="text-sm leading-relaxed space-y-4">
-              <div className="border-b-2 border-blue-600 pb-3 mb-4">
-                <h2 className="text-lg font-bold text-gray-900 mb-3">Terms & Conditions</h2>
+            {/* Terms & Conditions Content - MOBILE OPTIMIZED */}
+            <div className="text-xs md:text-sm leading-relaxed space-y-3 md:space-y-4">
+              <div className="border-b-2 border-blue-600 pb-2 md:pb-3 mb-3 md:mb-4">
+                <h2 className="text-base md:text-lg font-bold text-gray-900 mb-2 md:mb-3">Terms & Conditions</h2>
               </div>
               
-              <p className="mb-4 text-gray-800 text-sm leading-relaxed">
+              <p className="mb-3 md:mb-4 text-gray-800 text-xs md:text-sm leading-relaxed">
                 Please read the following terms and conditions carefully.
               </p>
               
@@ -230,15 +230,15 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 You must not make any booking unless you are 18 years of age or older and understand and agree with the following terms and conditions. These terms and conditions apply to bookings you make with a Consultant (instore, over the phone or by email) as well as online bookings made via our website. These terms and conditions govern our relationship with you. Once we accept a booking from you on behalf of a Supplier, you will also have a separate contract with the Supplier, which will be governed by other terms and conditions. It is your responsibility to make yourself aware of those other terms and conditions.
               </p>
 
-              {/* Executive Summary */}
-              <div className="mb-4 p-3 bg-orange-50 border-l-4 border-orange-500 rounded-r-lg">
-                <h3 className="text-sm font-bold text-orange-800 mb-2">
+              {/* Executive Summary - MOBILE OPTIMIZED */}
+              <div className="mb-3 md:mb-4 p-2 md:p-3 bg-orange-50 border-l-4 border-orange-500 rounded-r-lg">
+                <h3 className="text-xs md:text-sm font-bold text-orange-800 mb-1.5 md:mb-2">
                   Executive Summary
                 </h3>
-                <p className="text-orange-700 mb-2 text-xs">
+                <p className="text-orange-700 mb-1.5 md:mb-2 text-xs">
                   Although you should read all of the terms and conditions, the following is a summary of the most important:
                 </p>
-                <ul className="list-disc list-inside text-orange-700 space-y-1 text-xs">
+                <ul className="list-disc list-inside text-orange-700 space-y-0.5 md:space-y-1 text-xs">
                   <li>Prices, including, in some cases, of confirmed bookings, may be subject to change.</li>
                   <li>Some confirmed bookings are non-refundable if cancelled by you and it is your responsibility to check if this applies.</li>
                   <li>We will be entitled to retain our service fees even if a booking is cancelled or does not proceed for any reason which is not our fault.</li>
@@ -248,12 +248,12 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 </ul>
               </div>
 
-              {/* All Detailed Terms Content */}
-              <div className="space-y-6 text-gray-900">
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Prices and Taxes</h4>
-                  <div className="space-y-3">
-                    <p className="text-sm leading-relaxed">
+              {/* All Detailed Terms Content - MOBILE OPTIMIZED */}
+              <div className="space-y-4 md:space-y-6 text-gray-900">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Prices and Taxes</h4>
+                  <div className="space-y-2 md:space-y-3">
+                    <p className="text-xs md:text-sm leading-relaxed">
                       All prices that we quote are in Australian Dollars and based on twin share accommodation unless otherwise stated. Please note that prices quoted are subject to change at the discretion of the Supplier prior to booking. Price changes may occur after booking because of matters outside our control which increase the cost of the Product. Such factors include adverse currency fluctuations, fuel surcharges, taxes and airfare increases.
                     </p>
                     <p className="text-sm leading-relaxed">
@@ -265,17 +265,17 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Products</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Products</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     All Products that we quote on are subject to availability and may be withdrawn or varied by the Supplier without notice.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Fees and Surcharges</h4>
-                  <div className="space-y-3">
-                    <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Fees and Surcharges</h4>
+                  <div className="space-y-2 md:space-y-3">
+                    <p className="text-xs md:text-sm leading-relaxed">
                       A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees, credit card merchant fees, insurance claim processing fees or fees for adhoc services performed as required. You may see our current schedule of professional service fees at service-fees.
                     </p>
                     <p className="text-sm leading-relaxed">
@@ -287,9 +287,9 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Change and Cancellation Fees</h4>
-                  <div className="space-y-3">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Change and Cancellation Fees</h4>
+                  <div className="space-y-2 md:space-y-3">
                     <p className="text-sm leading-relaxed">
                       Be aware that some confirmed bookings are not refundable if cancelled, and also may not be transferable to another date or otherwise changed. Alternatively, a change may only be permissible subject to payment of an additional fee or charge. It is your responsibility to check if a booking is non-refundable or will incur charges for changing it before placing the booking.
                     </p>
@@ -299,9 +299,9 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Refunds</h4>
-                  <div className="space-y-3">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Refunds</h4>
+                  <div className="space-y-2 md:space-y-3">
                     <p className="text-sm leading-relaxed">
                       Your entitlement to a refund for cancelled bookings is subject to the relevant Supplier's terms and conditions. If you are entitled to a refund then, subject to the Supplier's terms and conditions, we will arrange for it to be supplied to us on your behalf, unless we expressly agree with you otherwise.
                     </p>
@@ -311,9 +311,9 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Deposits and Payments</h4>
-                  <div className="space-y-3">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Deposits and Payments</h4>
+                  <div className="space-y-2 md:space-y-3">
                     <p className="text-sm leading-relaxed">
                       You will be required to pay a deposit (or deposits) when booking. The deposit amount varies depending on the Product booked and lead time to travel. In some instances, full payment is required at the time of booking and your consultant will advise the deposit amount at the time of booking. All deposits are non-refundable for changes of mind or cancellations by you (subject to your rights under the Australian Consumer Law). Where a deposit has been collected, final payment is required no later than six weeks prior to departure. Failure to make payment by the due date may result in your booking being cancelled and deposits forfeited.
                     </p>
@@ -326,59 +326,59 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Information</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Information</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     Our responsibility is solely to arrange a booking of a Product in accordance with your instructions. It is your responsibility to make yourself aware of all information that it is necessary or desirable to know in order to make optimum use of the Product and to undertake travel generally. We strongly recommend that you read our travel information at travel-information which may be relevant, especially in relation to passport and visa requirements. Please note that this information is provided as a guide only, and although it is accurate to the best of our knowledge, we do not warrant that it is completely up-to-date at all times. Further, we do not warrant that it is comprehensive and it may not address a topic that is relevant to your travel plans. It is your responsibility to further investigate and confirm any matters that are applicable to you.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Special Requirements</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Special Requirements</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     You must inform your consultant regarding any special requirements you may have for your travel arrangements such as special meal and seating requests, room type or disabled access prior to making a booking. If you do not specifically inform us we will assume that you do not have any such requirements, and the booking will be made on that basis.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Frequent Flyer and Loyalty Programs</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Frequent Flyer and Loyalty Programs</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     When booking with one of our Consultants, it is your responsibility to let them know your frequent flyer membership details (or other applicable loyalty program details) for inclusion in your booking. Notwithstanding that your details may be included in the booking, we cannot guarantee that the Supplier will credit you with points for your booking.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Travel Documents</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Travel Documents</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     If you have booked with a consultant, it is your responsibility to collect all travel documents from us prior to travel unless your consultant is home based/mobile who can come to you. As a general rule, your travel documents will be available for collection two weeks prior to departure, however this will depend on your individual arrangements. Please contact your consultant to confirm when your travel documents are ready for collection. If you have booked online, you should print out and retain your travel documents as provided to you by the website (or in a confirmation email we send you). You must review your travel documents carefully and advise us immediately of any errors in names, dates or timings.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Agency</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Agency</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     We act as an agent for and sell various travel related products as an agent on behalf of numerous transport, accommodation and other service providers, such as airlines, coach, rail and cruise line operators, as well as travel wholesalers ("Suppliers"). We may receive fees, commissions, gifts or financial incentives from Suppliers in respect of Products we advise you of or arrange on your behalf. Any brochures provided by us to you are supplied by Suppliers, or are prepared by us based on content supplied by Suppliers, and we accept no liability for errors in that material. Your oral or written instructions to us are authority for us to make travel bookings on your behalf and to arrange relevant contracts between you and the applicable Supplier. Notwithstanding this authority, we are not your agent and do not have any fiduciary duty to you. We exercise care in the selection of reputable Suppliers, but we are not ourselves a provider of travel services and have no control over, or liability for, the Products provided by the Suppliers, who are third parties. All bookings are made on your behalf subject to the terms and conditions, including conditions of carriage and limitations of liability, imposed by the Supplier. We recommend that you read them before finalising the transaction and we can provide you with copies of the relevant terms and conditions on request. Your legal rights and remedies in connection with the provision of Products are against the Supplier and, except to the extent a problem is directly and primarily caused by fault on our part, are not against us. Specifically, if for any reason (excluding fault on our part) any Supplier is unable to provide the Product for which you have contracted either at all, or to the requisite standard, your remedies are against that Supplier and not against us.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Liability</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Liability</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     To the extent permitted by law, we do not accept any liability in contract, tort or otherwise for any injury, damage, loss (including consequential loss), delay, additional expense or inconvenience caused directly or indirectly by the acts, omissions or default, whether negligent or otherwise, of third party providers over whom we have no direct control, an event of Force Majeure affecting you, us or a Supplier or any other event which is beyond our control or which is not preventable by reasonable diligence on our part. Under circumstances where our liability cannot be excluded and where liability may be lawfully limited, such liability is limited to the remedies required of us under applicable law (including the Australian Consumer Law). In particular, we disclaim any liability for any consequential loss, including loss of enjoyment or amenity. This liability clause is subject to your rights under the Australian Consumer Law and nothing in these terms and conditions is intended to limit any rights you may have under the Competition and Consumer Act 2010 (Cth). Without limitation of the disclaimer of liability in the previous paragraph, any obligation we have to you will be suspended during the time and to the extent that we are prevented from, or delayed in, complying with that obligation by an event of Force Majeure. Your rights with respect to a confirmed booking affected by an event of Force Majeure will be subject to the terms and conditions of the relevant Supplier.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Governing Law</h4>
-                  <p className="text-sm leading-relaxed">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Governing Law</h4>
+                  <p className="text-xs md:text-sm leading-relaxed">
                     If any dispute arises between you and us, the laws applicable in VIC will apply. You irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of VIC, and waive any right that you may have to object to an action being brought in those courts.
                   </p>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Summary of Obligations</h4>
-                  <p className="text-sm leading-relaxed mb-3">Before making a booking, it is important that you meet the following requirements:</p>
-                  <ul className="list-disc list-inside space-y-2 text-sm pl-4">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Summary of Obligations</h4>
+                  <p className="text-xs md:text-sm leading-relaxed mb-2 md:mb-3">Before making a booking, it is important that you meet the following requirements:</p>
+                  <ul className="list-disc list-inside space-y-1 md:space-y-2 text-xs md:text-sm pl-3 md:pl-4">
                     <li>You are over the age of eighteen (18) and have sufficient funds to pay for the travel services.</li>
                     <li>You have read our terms and conditions and if booking for third parties warrant that you have their authority to do so and have conveyed these terms and conditions to them. You agree to indemnify us and the Supplier against any claims from third parties who have not in fact been properly informed.</li>
                     <li>You have read the terms and conditions of any applicable Suppliers and agree to be bound by those.</li>
@@ -389,9 +389,9 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </ul>
                 </div>
 
-                <div className="border-l-4 border-blue-200 pl-4">
-                  <h4 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-3 cursor-pointer">Definitions</h4>
-                  <div className="space-y-2 text-base">
+                <div className="border-l-4 border-blue-200 pl-3 md:pl-4">
+                  <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Definitions</h4>
+                  <div className="space-y-1.5 md:space-y-2 text-xs md:text-base">
                     <p><strong>"we" and "us"</strong> means TravLin Travel (ABN 69 613 027 062), and where the context permits, its Consultants.</p>
                     <p><strong>"Consultant"</strong> means an employee of TravLin Travel, with authority to book Products.</p>
                     <p><strong>"you"</strong> means a person who makes a booking for a Product with us.</p>
@@ -403,20 +403,20 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                {/* Privacy Policy Section */}
-                <div className="pt-6 border-t-2 border-gray-300">
-                  <div className="pb-3 mb-4">
-                    <h3 className="text-base font-bold text-gray-900">Privacy</h3>
+                {/* Privacy Policy Section - MOBILE OPTIMIZED */}
+                <div className="pt-4 md:pt-6 border-t-2 border-gray-300">
+                  <div className="pb-2 md:pb-3 mb-3 md:mb-4">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900">Privacy</h3>
                   </div>
                   
-                  <p className="text-sm leading-relaxed mb-4">
+                  <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4">
                     TravLin Travel, its businesses, websites and apps operate from Australia and this policy provides information in accordance with our obligations under the Privacy Act. We understand that you care how your personal information is handled and we appreciate your trust that we will do so carefully and sensibly and in compliance with the Australian Privacy Principles of the Privacy Act 1988.
                   </p>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Your personal information</h4>
-                    <div className="space-y-3">
-                      <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Your personal information</h4>
+                    <div className="space-y-2 md:space-y-3">
+                      <p className="text-xs md:text-sm leading-relaxed">
                         TravLin Travel and its associated entities may, in the course of arranging travel for you, receive and hold personal information about you, that includes but is not limited to, your full name, your contact details, your business or home address, your date of birth, your passport data, details of any loyalty program memberships, health condition and medical history, concession card number or driver's license number and other data relevant to the services – general and personalised that we provide you.
                       </p>
                       <p className="text-sm leading-relaxed">
@@ -440,10 +440,10 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     </div>
                   </div>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Marketing</h4>
-                    <div className="space-y-3">
-                      <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Marketing</h4>
+                    <div className="space-y-2 md:space-y-3">
+                      <p className="text-xs md:text-sm leading-relaxed">
                         Serving customers well is very important to us. As part of this service, we may use your personal information to identify a product or service that you may be interested in. We may with your consent where required by applicable law, use the contact details you have provided to contact you from time to time whether by phone, email, SMS or post to tell you about new or exciting products or services and special offers that we believe may be of interest to you, including information about our business partners' products and services.
                       </p>
                       <p className="text-sm leading-relaxed">
@@ -452,16 +452,16 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     </div>
                   </div>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Privacy Complaints</h4>
-                    <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Privacy Complaints</h4>
+                    <p className="text-xs md:text-sm leading-relaxed">
                       If you wish to complain about our handling of your personal information, please contact us with your concerns. We will investigate all complaints and respond to you as soon as practicable. We will need to verify your identity. If we find a complaint justified, we will resolve it. If necessary, we will change our policies and procedures to maintain our high standards of performance, service and customer care.
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Privacy Officer Contact</h4>
-                    <div className="text-sm space-y-1">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Privacy Officer Contact</h4>
+                    <div className="text-xs md:text-sm space-y-0.5 md:space-y-1">
                       <p>TravLin Travel</p>
                       <p>PO Box 7303, Karingal Centre</p>
                       <p>Karingal VICTORIA 3199</p>
@@ -471,16 +471,16 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
-                {/* Complaints Handling Policy */}
-                <div className="pt-6 border-t-2 border-gray-300">
-                  <div className="pb-3 mb-4">
-                    <h3 className="text-base font-bold text-gray-900">Complaints Handling Policy and Procedures</h3>
+                {/* Complaints Handling Policy - MOBILE OPTIMIZED */}
+                <div className="pt-4 md:pt-6 border-t-2 border-gray-300">
+                  <div className="pb-2 md:pb-3 mb-3 md:mb-4">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900">Complaints Handling Policy and Procedures</h3>
                   </div>
                   
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Objective of the Policy</h4>
-                    <div className="space-y-3">
-                      <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Objective of the Policy</h4>
+                    <div className="space-y-2 md:space-y-3">
+                      <p className="text-xs md:text-sm leading-relaxed">
                         As a responsible travel agent, we seek to maintain and enhance our reputation of providing you with high quality products and services. We value complaints as they assist us to improve our products, services and customer service. We are committed to being responsive to the needs and concerns of our customers or potential customers and to resolving your complaint as quickly as possible.
                       </p>
                       <p className="text-sm leading-relaxed">
@@ -496,27 +496,27 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     </div>
                   </div>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">Definition of a Complaint</h4>
-                    <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">Definition of a Complaint</h4>
+                    <p className="text-xs md:text-sm leading-relaxed">
                       In this policy a complaint means an expression of dissatisfaction by a customer relating to a travel service provided by us.
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-orange-200 pl-4 mb-4">
-                    <h4 className="text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-3 cursor-pointer">How a complaint can be made</h4>
-                    <div className="space-y-3">
-                      <p className="text-sm leading-relaxed">
+                  <div className="border-l-4 border-orange-200 pl-3 md:pl-4 mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base font-bold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2 md:mb-3 cursor-pointer">How a complaint can be made</h4>
+                    <div className="space-y-2 md:space-y-3">
+                      <p className="text-xs md:text-sm leading-relaxed">
                         If you are dissatisfied with a travel service provided by us, you should in the first instance consider speaking directly with the staff member/s you have been dealing with. If you are uncomfortable with this or consider the relevant staff member is unable to address your concerns you can lodge a complaint with us in one of the following ways:
                       </p>
-                      <ul className="list-disc list-inside space-y-1 text-sm pl-4">
+                      <ul className="list-disc list-inside space-y-0.5 md:space-y-1 text-xs md:text-sm pl-3 md:pl-4">
                         <li>By completing the contact us section on our website - travlintravel.com.au;</li>
                         <li>By telephoning us - +61 (415) 355 851;</li>
                         <li>By writing to us - PO Box 7303, Karingal Centre, Karingal VIC 3199;</li>
                         <li>By emailing us - hello@travlintravel.com.au; and</li>
                         <li>In person (by appointment) speaking to any of our customer service staff.</li>
                       </ul>
-                      <p className="text-sm leading-relaxed">
+                      <p className="text-xs md:text-sm leading-relaxed">
                         If we receive your complaint verbally and we consider it appropriate, we may ask you to put your complaint in writing. Our complaints management process is free of charge.
                       </p>
                     </div>
