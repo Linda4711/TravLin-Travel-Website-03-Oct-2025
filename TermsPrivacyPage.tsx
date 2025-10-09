@@ -115,7 +115,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
       />
 
       {/* Main Content - EXACT COPY OF MODAL CONTENT */}
-      <main className="content-container py-8">
+      <main className="content-container py-8" style={{ paddingTop: '120px' }}>
         <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-2xl">
           
           {/* Header Section */}
@@ -142,28 +142,28 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-sm font-medium"
+                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Schedule of Professional Service Fees
+                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <span className="text-center">Schedule of Professional Service Fees</span>
                 </a>
                 <a
                   href="/TravLin-Travel-Travel-Information-ONLY-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-sm font-medium"
+                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Travel Information & Terms
+                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <span className="text-center">Travel Information & Terms</span>
                 </a>
                 <a
                   href="/TravLin-Travel-Customer-Acceptance-ONLY-JUL25.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-sm font-medium"
+                  className="flex items-center justify-center p-3 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
                 >
-                  <FileText className="w-4 h-4 mr-2" />
-                  Customer Acceptance Form
+                  <FileText className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                  <span className="text-center">Customer Acceptance Form</span>
                 </a>
               </div>
             </div>
@@ -623,9 +623,14 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
         <div 
           className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           style={{ zIndex: 999999 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowCustomerAcceptance(false);
+            }
+          }}
         >
           <div 
-            className="bg-white rounded-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl"
+            className="bg-white rounded-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl mx-auto my-auto"
             style={{ zIndex: 999999 }}
           >
             {/* Header - ORANGE THEME */}
