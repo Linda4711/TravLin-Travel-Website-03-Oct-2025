@@ -56,27 +56,40 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
     acceptCustomerForm: false
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Scroll to top on page load - ENSURES USER SEES TOP OF PAGE FIRST
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' }); // Use 'auto' for instant scroll on page load
   }, []);
 
   const handleFormSubmit = async () => {
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
     // Validate required fields
     if (!form.firstName.trim()) {
       toast.error('Please enter your first name');
+      setIsSubmitting(false);
       return;
     }
     if (!form.lastName.trim()) {
       toast.error('Please enter your last name');
+      setIsSubmitting(false);
       return;
     }
     if (!form.email.trim()) {
       toast.error('Please enter your email address');
+      setIsSubmitting(false);
       return;
     }
     if (!form.acceptTravelInfo || !form.acceptServiceFees || !form.acceptCustomerForm) {
       toast.error('Please accept all terms and conditions to proceed');
+      setIsSubmitting(false);
       return;
     }
 
@@ -139,6 +152,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
 
     // Navigate to home page hero after short delay
     setTimeout(() => {
+      setIsSubmitting(false);
       onNavigateToHome();
     }, 1500);
   };
@@ -762,11 +776,21 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
               <div className="flex justify-end pt-2">
                 <Button
                   onClick={handleFormSubmit}
-                  className="px-6 py-2 text-sm bg-orange-500 hover:bg-orange-600 text-white shadow-lg"
-                  style={{ backgroundColor: '#ED7D31', borderRadius: '4px' }}
+                  disabled={isSubmitting}
+                  className="px-6 py-2 text-sm bg-orange-500 hover:bg-orange-600 text-white shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  style={{ backgroundColor: isSubmitting ? '#d16a28' : '#ED7D31', borderRadius: '4px' }}
                 >
-                  <CheckCircle className="w-4 h-4 mr-2" />
-                  Accept Terms & Continue
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Accept Terms & Continue
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
