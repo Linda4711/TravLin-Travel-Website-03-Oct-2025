@@ -359,7 +359,7 @@ Please add this email to the newsletter mailing list for travel updates and spec
         
         {/* Copyright Footer */}
         <div className="border-t border-gray-700 mt-4 pt-3 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
-          <p>© 2025 TravLin Travel. All rights reserved. • Founded by Linda Forster • Powered by Passion</p>
+          <p>© 2026 TravLin Travel. All rights reserved. • Founded by Linda Forster • Powered by Passion</p>
           <div className="flex space-x-4 mt-2 md:mt-0">
             <button 
               className="hover:text-orange-400 transition-colors duration-300 hover:underline"
