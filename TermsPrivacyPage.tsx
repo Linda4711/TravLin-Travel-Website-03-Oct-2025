@@ -205,7 +205,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-1.5">
                 <a
-                  href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-JUL25.pdf"
+                  href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-OCT26.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center p-1.5 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
@@ -214,7 +214,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <span className="text-center text-xs">Schedule of Professional Service Fees</span>
                 </a>
                 <a
-                  href="/TravLin-Travel-Travel-Information-ONLY-JUL25.pdf"
+                  href="/TravLin-Travel-Travel-Information-ONLY-OCT-26.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center p-1.5 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
@@ -223,7 +223,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <span className="text-center text-xs">Travel Information & Terms</span>
                 </a>
                 <a
-                  href="/TravLin-Travel-Customer-Acceptance-ONLY-JUL25.pdf"
+                  href="/TravLin-Travel-Customer-Acceptance-ONLY-OCT26.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center p-1.5 bg-white border-2 border-blue-500 rounded text-blue-700 hover:bg-blue-50 transition-colors text-xs font-medium whitespace-nowrap"
