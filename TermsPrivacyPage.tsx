@@ -297,7 +297,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                       A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees or fees for ad-hoc services performed as required.
                     </p>
                     <p className="text-xs leading-snug">
-                      Payment by credit card will not incur a surcharge. Any restriction in relation to credit card acceptance is outlined in the schedule of professional service fees www.travlintravel.com.au/service-fees.
+                      Payment by credit card will not incur a surcharge. Any restriction in relation to credit card acceptance is outlined in the schedule of professional service fees <a href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-OCT26.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">www.travlintravel.com.au/service-fees</a>.
                     </p>
                     <p className="text-xs leading-snug">
                       You authorise us to charge all monies payable by you in relation to any booking we make on your behalf or other services we have procured or provided to the credit card or debit card designated by you. If payment is not received from the card issuer or its agents for any reason, you agree to pay us all amounts due immediately on demand.
@@ -350,7 +350,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 <div className="border-l-4 border-blue-200 pl-2">
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Information</h4>
                   <p className="text-xs leading-snug">
-                    Our responsibility is solely to arrange a booking of a Product in accordance with your instructions. It is your responsibility to make yourself aware of all information that it is necessary or desirable to know in order to make optimum use of the Product and to undertake travel generally. We strongly recommend that you read our travel information at               www.travlintravel.com.au/travel-information which may be relevant, especially in relation to passport and visa requirements. Please note that this information is provided as a guide only, and although it is accurate to the best of our knowledge, we do not warrant that it is completely up-to-date at all times. Further, we do not warrant that it is comprehensive and it may not address a topic that is relevant to your travel plans. It is your responsibility to further investigate and confirm any matters that are applicable to you.
+                    Our responsibility is solely to arrange a booking of a Product in accordance with your instructions. It is your responsibility to make yourself aware of all information that it is necessary or desirable to know in order to make optimum use of the Product and to undertake travel generally. We strongly recommend that you read our travel information at <a href="/TravLin-Travel-Travel-Information-ONLY-OCT-26.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">www.travlintravel.com.au/travel-information</a> which may be relevant, especially in relation to passport and visa requirements. Please note that this information is provided as a guide only, and although it is accurate to the best of our knowledge, we do not warrant that it is completely up-to-date at all times. Further, we do not warrant that it is comprehensive and it may not address a topic that is relevant to your travel plans. It is your responsibility to further investigate and confirm any matters that are applicable to you.
                   </p>
                 </div>
 
@@ -405,7 +405,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <li>You have read the terms and conditions of any applicable Suppliers and agree to be bound by those.</li>
                     <li>You are responsible for checking the accuracy of all documents provided to you.</li>
                     <li>You are responsible for confirming departure times of any booked services at least 24 hours prior to travel.</li>
-                    <li>You warrant and acknowledge that you have accessed the Smartraveller website http://smartraveller.gov.au for any specific information in relation to your intended destination.</li>
+                    <li>You warrant and acknowledge that you have accessed the Smartraveller website <a href="https://smartraveller.gov.au" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">https://smartraveller.gov.au</a> for any specific information in relation to your intended destination.</li>
                     <li>You accept that passports, visas and other required identification documents are your responsibility.</li>
                   </ul>
                 </div>
