@@ -58,10 +58,19 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Scroll to top on page load - ENSURES USER SEES TOP OF PAGE FIRST
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' }); // Use 'auto' for instant scroll on page load
-  }, []);
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'auto', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+      }, 300);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
 
   const handleFormSubmit = async () => {
     // Prevent multiple submissions
