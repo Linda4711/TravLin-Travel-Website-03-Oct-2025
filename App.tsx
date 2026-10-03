@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import './styles/globals.css';
 import { Toaster } from './components/ui/sonner';
 import { Button } from './components/ui/button';
@@ -394,6 +394,10 @@ function AppContent() {
             />
           </div>
         } />
+          {/* Redirects for links used in the Terms PDF */}
+          <Route path="/service-fees" element={<Navigate to="/terms-and-privacy" replace />} />
+          <Route path="/travel-information" element={<Navigate to="/terms-and-privacy" replace />} />
+          <Route path="/customer-acceptance" element={<Navigate to="/terms-and-privacy" replace />} />
         {/* Fallback to home page */}
         <Route path="*" element={<HomePage />} />
       </Routes>
