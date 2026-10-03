@@ -297,7 +297,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                       A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees, credit card merchant fees, insurance claim processing fees or fees for adhoc services performed as required. You may see our current schedule of professional service fees at service-fees.
                     </p>
                     <p className="text-xs leading-snug">
-                      Payment by credit card will incur a surcharge to offset our cost of acceptance of payment by credit card. The surcharge varies depending on credit card type, it is your responsibility to advise the correct credit card type to ensure that the appropriate surcharge is applied. We accept no responsibility for an inappropriate surcharge being applied if the correct card type has not been advised, and the surcharge applied shall not be refundable.
+                      Payment by credit card will not incur a surcharge. Any restriction in relation to credit card acceptance is outlined in the schedule of professional service fees www.travlintravel.com.au/service-fees.
                     </p>
                     <p className="text-xs leading-snug">
                       You authorise us to charge all monies payable by you in relation to any booking we make on your behalf or other services we have procured or provided to the credit card or debit card designated by you. If payment is not received from the card issuer or its agents for any reason, you agree to pay us all amounts due immediately on demand.
