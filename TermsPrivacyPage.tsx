@@ -245,7 +245,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
               </p>
               
               <p className="mb-3 text-gray-800 text-xs leading-snug">
-                You must not make any booking unless you are 18 years of age or older and understand and agree with the following terms and conditions. These terms and conditions apply to bookings you make with a Consultant (instore, over the phone or by email) as well as online bookings made via our website. These terms and conditions govern our relationship with you. Once we accept a booking from you on behalf of a Supplier, you will also have a separate contract with the Supplier, which will be governed by other terms and conditions. It is your responsibility to make yourself aware of those other terms and conditions.
+                You must not make any booking unless you are 18 years of age or older and understand and agree with the following terms and conditions. These terms and conditions apply to bookings you make with a Consultant (over the phone, by email or through social media or direct messaging) as well as online bookings made via our website. These terms and conditions govern our relationship with you. Once we accept a booking from you on behalf of a Supplier, you will also have a separate contract with the Supplier, which will be governed by other terms and conditions. It is your responsibility to make yourself aware of those other terms and conditions.
               </p>
 
               {/* Executive Summary */}
@@ -261,7 +261,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <li>Some confirmed bookings are non-refundable if cancelled by you and it is your responsibility to check if this applies.</li>
                   <li>We will be entitled to retain our service fees even if a booking is cancelled or does not proceed for any reason which is not our fault.</li>
                   <li>It is your responsibility to make yourself aware of all information relevant to your travel plans, including but not limited to visa requirements and health precautions.</li>
-                  <li>We are not your agent and may receive additional fees or other incentives from Suppliers.</li>
+                  <li>We act as an agent for Suppliers from whom we may receive additional fees or other incentives.</li>
                   <li>We are not liable for the accuracy of any published Supplier content including websites and brochures.</li>
                 </ul>
               </div>
@@ -294,7 +294,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Fees and Surcharges</h4>
                   <div className="space-y-1">
                     <p className="text-xs leading-snug">
-                      A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees, credit card merchant fees, insurance claim processing fees or fees for adhoc services performed as required. You may see our current schedule of professional service fees at service-fees.
+                      A variety of fees and surcharges may be payable to us, including booking or reservation fees, cancellation and amendment fees or fees for ad-hoc services performed as required.
                     </p>
                     <p className="text-xs leading-snug">
                       Payment by credit card will not incur a surcharge. Any restriction in relation to credit card acceptance is outlined in the schedule of professional service fees www.travlintravel.com.au/service-fees.
@@ -314,6 +314,9 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <p className="text-xs leading-snug">
                       Changes and cancellations of confirmed bookings may incur fees from Suppliers in addition to our service fees. Suppliers' fees are outlined in their relevant terms and conditions.
                     </p>
+                    <p className="text-xs leading-snug">
+                      We reserve the right to cancel your booking without liability if we have reasonable grounds to believe it is fraudulent.
+                    </p>
                   </div>
                 </div>
 
@@ -324,7 +327,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                       Your entitlement to a refund for cancelled bookings is subject to the relevant Supplier's terms and conditions. If you are entitled to a refund then, subject to the Supplier's terms and conditions, we will arrange for it to be supplied to us on your behalf, unless we expressly agree with you otherwise.
                     </p>
                     <p className="text-xs leading-snug">
-                      If we are managing or arranging a refund for a cancelled booking on your behalf it will not be paid to you until the Supplier provides the refund to us, and we will not be liable for any delay on the part of the Supplier. Be aware that typically airlines will take between 60-90 days to process a refund. Please note that if we are entitled to a service fee for placing a booking, we will remain entitled to this fee if you cancel the booking or the Supplier fails to provide you with the Product for any reason (other than our default), including in an event of Force Majeure. We will be entitled to deduct our service fee from any refund we receive on your behalf before remitting the balance to you.
+                      If we are managing or arranging a refund for a cancelled booking on your behalf it will not be paid to you until the Supplier provides the refund to us, and we will not be liable for any delay on the part of the Supplier. Be aware that airlines may take between 60-90 days to process a refund. Please note that if we are entitled to a service fee for placing a booking, we will remain entitled to this fee if you cancel the booking or the Supplier fails to provide you with the Product for any reason (other than our default), including in an event of Force Majeure. We will be entitled to deduct our service fee from any refund we receive on your behalf before remitting the balance to you.
                     </p>
                   </div>
                 </div>
@@ -333,13 +336,13 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Deposits and Payments</h4>
                   <div className="space-y-1">
                     <p className="text-xs leading-snug">
-                      You will be required to pay a deposit (or deposits) when booking. The deposit amount varies depending on the Product booked and lead time to travel. In some instances, full payment is required at the time of booking and your consultant will advise the deposit amount at the time of booking. All deposits are non-refundable for changes of mind or cancellations by you (subject to your rights under the Australian Consumer Law). Where a deposit has been collected, final payment is required no later than six weeks prior to departure. Failure to make payment by the due date may result in your booking being cancelled and deposits forfeited.
+                      You will be required to pay a deposit (or deposits) when booking. The deposit amount varies depending on the Product booked and lead time to travel. In some instances, full payment is required at the time of booking and your Consultant will advise the deposit amount at the time of booking. All deposits are non-refundable for changes of mind or cancellations by you (subject to your rights under the Australian Consumer Law). Where a deposit has been collected, final payment is required no later than six weeks prior to departure. Failure to make payment by the due date may result in your booking being cancelled and deposits forfeited.
                     </p>
                     <p className="text-xs leading-snug">
-                      Payments made by direct deposit may take up to three business days to process. If you are paying by this method, you will need to make the payment at least three business days prior to the actual due date. You must notify you Consultant of your payment once it has been made.
+                      Payments made by direct deposit may take up to three business days to process. If you are paying by this method, you will need to make the payment at least three business days prior to the actual due date. You must notify your Consultant of your payment once it has been made.
                     </p>
                     <p className="text-xs leading-snug">
-                      Payments made by personal cheque (excluding bank cheques) require five business days to process. If you are paying by this method, you will need to make the payment at least three business days prior to the actual due date. You agree not to stop payment of the cheque even when you cancel a booking. You agree that we may apply the proceeds of the cheque to satisfy any liability you have to us or to a Supplier, including any liability in respect of cancellation fees, before refunding the balance to you.
+                      Payments made by personal cheque (excluding bank cheques) require five business days to process. If you are paying by this method, you will need to make the payment at least five business days prior to the actual due date. You agree not to stop payment of the cheque even when you cancel a booking. You agree that we may apply the proceeds of the cheque to satisfy any liability you have to us or to a Supplier, including any liability in respect of cancellation fees, before refunding the balance to you.
                     </p>
                   </div>
                 </div>
@@ -354,7 +357,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 <div className="border-l-4 border-blue-200 pl-2">
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Special Requirements</h4>
                   <p className="text-xs leading-snug">
-                    You must inform your consultant regarding any special requirements you may have for your travel arrangements such as special meal and seating requests, room type or disabled access prior to making a booking. If you do not specifically inform us we will assume that you do not have any such requirements, and the booking will be made on that basis.
+                    You must inform your Consultant regarding any special requirements you may have for your travel arrangements such as special meal and seating requests, room type or disabled access prior to making a booking. If you do not specifically inform us we will assume that you do not have any such requirements, and the booking will be made on that basis.
                   </p>
                 </div>
 
@@ -368,14 +371,14 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 <div className="border-l-4 border-blue-200 pl-2">
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Travel Documents</h4>
                   <p className="text-xs leading-snug">
-                    If you have booked with a consultant, it is your responsibility to collect all travel documents from us prior to travel unless your consultant is home based/mobile who can come to you. As a general rule, your travel documents will be available for collection two weeks prior to departure, however this will depend on your individual arrangements. Please contact your consultant to confirm when your travel documents are ready for collection. If you have booked online, you should print out and retain your travel documents as provided to you by the website (or in a confirmation email we send you). You must review your travel documents carefully and advise us immediately of any errors in names, dates or timings.
+                    If you have booked with a consultant, it is your responsibility to collect all travel documents from us prior to travel unless your consultant is home based/mobile who can come to you or organise delivery. As a general rule, your travel documents will be available for collection two weeks prior to departure, however this will depend on your individual arrangements. Please contact your Consultant to confirm when your travel documents are ready for collection. If you have booked online, you should print out and retain your travel documents as provided to you by the website (or in a confirmation email we send you). You must review your travel documents carefully and advise us immediately of any errors in names, dates or timings.
                   </p>
                 </div>
 
                 <div className="border-l-4 border-blue-200 pl-2">
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Agency</h4>
                   <p className="text-xs leading-snug">
-                    We act as an agent for and sell various travel related products as an agent on behalf of numerous transport, accommodation and other service providers, such as airlines, coach, rail and cruise line operators, as well as travel wholesalers ("Suppliers"). We may receive fees, commissions, gifts or financial incentives from Suppliers in respect of Products we advise you of or arrange on your behalf. Any brochures provided by us to you are supplied by Suppliers, or are prepared by us based on content supplied by Suppliers, and we accept no liability for errors in that material. Your oral or written instructions to us are authority for us to make travel bookings on your behalf and to arrange relevant contracts between you and the applicable Supplier. Notwithstanding this authority, we are not your agent and do not have any fiduciary duty to you. We exercise care in the selection of reputable Suppliers, but we are not ourselves a provider of travel services and have no control over, or liability for, the Products provided by the Suppliers, who are third parties. All bookings are made on your behalf subject to the terms and conditions, including conditions of carriage and limitations of liability, imposed by the Supplier. We recommend that you read them before finalising the transaction and we can provide you with copies of the relevant terms and conditions on request. Your legal rights and remedies in connection with the provision of Products are against the Supplier and, except to the extent a problem is directly and primarily caused by fault on our part, are not against us. Specifically, if for any reason (excluding fault on our part) any Supplier is unable to provide the Product for which you have contracted either at all, or to the requisite standard, your remedies are against that Supplier and not against us.
+                    We act as an agent for and sell various travel related products as an agent on behalf of numerous transport, accommodation and other service providers, such as airlines, coach, rail and cruise line operators, as well as travel wholesalers ("Suppliers"). We may receive fees, commissions, gifts or financial incentives from Suppliers in respect of Products we advise you of or arrange on your behalf. Any brochures provided by us to you are supplied by Suppliers, or are prepared by us based on content supplied by Suppliers, and we accept no liability for errors in that material. Your oral or written instructions to us are authority for us to make travel bookings on your behalf and to arrange relevant contracts between you and the applicable Supplier. Notwithstanding this authority, we act as an agent for Suppliers only and do not have any fiduciary duty to you. We exercise care in the selection of reputable Suppliers, but we are not ourselves a provider of travel services and have no control over, or liability for, the Products provided by the Suppliers, who are third parties. All bookings are made on your behalf subject to the terms and conditions, including conditions of carriage and limitations of liability, imposed by the Supplier. We recommend that you read them before finalising the transaction and we can provide you with copies of the relevant terms and conditions on request. Your legal rights and remedies in connection with the provision of Products are against the Supplier and, except to the extent a problem is directly and primarily caused by fault on our part, are not against us. Specifically, if for any reason (excluding fault on our part) any Supplier is unable to provide the Product for which you have contracted either at all, or to the requisite standard, your remedies are against that Supplier and not against us.
                   </p>
                 </div>
 
@@ -389,7 +392,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                 <div className="border-l-4 border-blue-200 pl-2">
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Governing Law</h4>
                   <p className="text-xs leading-snug">
-                    If any dispute arises between you and us, the laws applicable in VIC will apply. You irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of VIC, and waive any right that you may have to object to an action being brought in those courts.
+                    If any dispute arises between you and us, the laws applicable in Victoria will apply. You irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of Victoria, and waive any right that you may have to object to an action being brought in those courts.
                   </p>
                 </div>
 
@@ -403,7 +406,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <li>You are responsible for checking the accuracy of all documents provided to you.</li>
                     <li>You are responsible for confirming departure times of any booked services at least 24 hours prior to travel.</li>
                     <li>You warrant and acknowledge that you have accessed the Smartraveller website http://smartraveller.gov.au for any specific information in relation to your intended destination.</li>
-                    <li>You accept that passport, visas and other required identification documents are your responsibility.</li>
+                    <li>You accept that passports, visas and other required identification documents are your responsibility.</li>
                   </ul>
                 </div>
 
@@ -411,9 +414,10 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   <h4 className="text-xs md:text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300 mb-1 cursor-pointer">Definitions</h4>
                   <div className="space-y-1 text-xs">
                     <p><strong>"we" and "us"</strong> means TravLin Travel (ABN 69 613 027 062), and where the context permits, its Consultants.</p>
-                    <p><strong>"Consultant"</strong> means an employee of TravLin Travel, with authority to book Products.</p>
+                    <p><strong>"Consultant"</strong> means an employee, contractor or affiliate of TravLin Travel, with authority to book Products.</p>
                     <p><strong>"you"</strong> means a person who makes a booking for a Product with us.</p>
                     <p><strong>"your Consultant"</strong> means the particular Consultant or Consultants with whom you negotiate the booking of a Product.</p>
+                    <p><strong>"website"</strong> means our website www.travlintravel.com.au.</p>
                     <p><strong>"Supplier"</strong> means a third party company or person who provides Products, including a wholesaler of such Products.</p>
                     <p><strong>"Product"</strong> means travel and holiday related products and services including accommodation, leisure activities and various forms of transport, including packaged combinations thereof.</p>
                     <p><strong>"Travel documents"</strong> means any document (whether in electronic form or otherwise) used to confirm an arrangement with a Supplier, including (without limitation) airline tickets, hotel vouchers and tour vouchers.</p>
@@ -421,6 +425,11 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                   </div>
                 </div>
 
+                  <div className="p-2 border-2 border-gray-800 rounded">
+                  <p className="text-xs font-semibold leading-snug">
+                    To proceed with your booking, please complete our customer acceptance form following or available at www.travlintravel.com.au/customer-acceptance to acknowledge that you have read and agree to our terms and conditions and professional service fees.
+                  </p>
+                </div>
                 {/* Privacy Policy Section - CONSISTENT SMALL TEXT */}
                 <div className="pt-2 border-t-2 border-gray-300">
                   <div className="pb-1 mb-2">
