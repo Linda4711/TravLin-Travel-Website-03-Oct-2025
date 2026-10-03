@@ -71,6 +71,8 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
       }, 300);
     } else {
       window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, []);
 
   const handleFormSubmit = async () => {
     // Prevent multiple submissions
