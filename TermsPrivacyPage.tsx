@@ -745,7 +745,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <label className="text-xs text-gray-700 leading-tight">
                       I have read and agree to the{' '}
                       <span className="text-blue-600 font-medium cursor-pointer hover:underline">
-                        Travel Information & Terms of Service
+                        <a href="/TravLin-Travel-Travel-Information-ONLY-OCT-26.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">Travel Information & Terms of Service</a>
                       </span>{' '}
                       <span className="text-red-500">*</span>
                     </label>
@@ -761,7 +761,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <label className="text-xs text-gray-700 leading-tight">
                       I have read and agree to the{' '}
                       <span className="text-blue-600 font-medium cursor-pointer hover:underline">
-                        Schedule of Professional Service Fees
+                        <a href="/TravLin-Travel-Schedule-of-Fees-ATIA-Fee-Flyer-OCT26.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">Schedule of Professional Service Fees</a>
                       </span>{' '}
                       <span className="text-red-500">*</span>
                     </label>
@@ -777,7 +777,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
                     <label className="text-xs text-gray-700 leading-tight">
                       I have read and agree to the{' '}
                       <span className="text-blue-600 font-medium cursor-pointer hover:underline">
-                        Customer Acceptance Form
+                        <a href="/TravLin-Travel-Customer-Acceptance-ONLY-OCT26.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">Customer Acceptance Form</a>
                       </span>{' '}
                       <span className="text-red-500">*</span>
                     </label>
