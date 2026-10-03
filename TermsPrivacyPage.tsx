@@ -191,7 +191,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
             </div>
             <div className="flex items-center gap-2 flex-wrap justify-center">
               <h1 className="text-base md:text-lg font-bold text-gray-800">Terms, Privacy, Acceptance</h1>
-              <span className="text-xs text-gray-500">• Effective 01 Jul 2025</span>
+              <span className="text-xs text-gray-500">• Effective 01 Oct 2026</span>
             </div>
           </div>
 
