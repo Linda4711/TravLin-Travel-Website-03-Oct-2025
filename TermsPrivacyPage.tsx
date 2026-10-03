@@ -438,7 +438,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
 
                   <div className="p-2 border-2 border-gray-800 rounded">
                   <p className="text-xs font-semibold leading-snug">
-                    To proceed with your booking, please complete our customer acceptance form following or available at <a href="/customer-acceptance" className="text-blue-600 underline">www.travlintravel.com.au/customer-acceptance</a> to acknowledge that you have read and agree to our terms and conditions and professional service fees.
+                    To proceed with your booking, please complete our customer acceptance form following or available at <a href="#customer-acceptance-form" className="text-blue-600 underline">www.travlintravel.com.au/customer-acceptance</a> to acknowledge that you have read and agree to our terms and conditions and professional service fees.
                   </p>
                 </div>
                 {/* Privacy Policy Section - CONSISTENT SMALL TEXT */}
@@ -645,7 +645,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
           </div>
 
           {/* CUSTOMER ACCEPTANCE FORM - EMBEDDED DIRECTLY ON PAGE */}
-          <div id="customer-acceptance-form" className="bg-white border-t-2 border-orange-200 px-4 py-4">
+          <div id="customer-acceptance-form" style={{ scrollMarginTop: '80px' }} className="bg-white border-t-2 border-orange-200 px-4 py-4">
             {/* Header */}
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-9 h-9 bg-orange-500 rounded-full flex items-center justify-center shadow-md">
