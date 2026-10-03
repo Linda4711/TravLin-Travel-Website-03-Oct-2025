@@ -427,7 +427,7 @@ const TermsPrivacyPage: React.FC<TermsPrivacyPageProps> = ({
 
                   <div className="p-2 border-2 border-gray-800 rounded">
                   <p className="text-xs font-semibold leading-snug">
-                    To proceed with your booking, please complete our customer acceptance form following or available at www.travlintravel.com.au/customer-acceptance to acknowledge that you have read and agree to our terms and conditions and professional service fees.
+                    To proceed with your booking, please complete our customer acceptance form following or available at <a href="/customer-acceptance" className="text-blue-600 underline">www.travlintravel.com.au/customer-acceptance</a> to acknowledge that you have read and agree to our terms and conditions and professional service fees.
                   </p>
                 </div>
                 {/* Privacy Policy Section - CONSISTENT SMALL TEXT */}
